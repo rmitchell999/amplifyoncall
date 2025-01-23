@@ -8,54 +8,117 @@ type GeneratedMutation<InputType, OutputType> = string & {
   __generatedMutationOutput: OutputType;
 };
 
-export const createTodo = /* GraphQL */ `mutation CreateTodo(
-  $input: CreateTodoInput!
-  $condition: ModelTodoConditionInput
+export const createOnCallEntry = /* GraphQL */ `mutation CreateOnCallEntry(
+  $input: CreateOnCallEntryInput!
+  $condition: ModelOnCallEntryConditionInput
 ) {
-  createTodo(input: $input, condition: $condition) {
+  createOnCallEntry(input: $input, condition: $condition) {
     id
-    name
-    description
+    groupName
+    day
+    contact
+    phone
     createdAt
     updatedAt
     __typename
   }
 }
 ` as GeneratedMutation<
-  APITypes.CreateTodoMutationVariables,
-  APITypes.CreateTodoMutation
+  APITypes.CreateOnCallEntryMutationVariables,
+  APITypes.CreateOnCallEntryMutation
 >;
-export const updateTodo = /* GraphQL */ `mutation UpdateTodo(
-  $input: UpdateTodoInput!
-  $condition: ModelTodoConditionInput
+export const updateOnCallEntry = /* GraphQL */ `mutation UpdateOnCallEntry(
+  $input: UpdateOnCallEntryInput!
+  $condition: ModelOnCallEntryConditionInput
 ) {
-  updateTodo(input: $input, condition: $condition) {
+  updateOnCallEntry(input: $input, condition: $condition) {
     id
-    name
-    description
+    groupName
+    day
+    contact
+    phone
     createdAt
     updatedAt
     __typename
   }
 }
 ` as GeneratedMutation<
-  APITypes.UpdateTodoMutationVariables,
-  APITypes.UpdateTodoMutation
+  APITypes.UpdateOnCallEntryMutationVariables,
+  APITypes.UpdateOnCallEntryMutation
 >;
-export const deleteTodo = /* GraphQL */ `mutation DeleteTodo(
-  $input: DeleteTodoInput!
-  $condition: ModelTodoConditionInput
+export const deleteOnCallEntry = /* GraphQL */ `mutation DeleteOnCallEntry(
+  $input: DeleteOnCallEntryInput!
+  $condition: ModelOnCallEntryConditionInput
 ) {
-  deleteTodo(input: $input, condition: $condition) {
+  deleteOnCallEntry(input: $input, condition: $condition) {
     id
-    name
-    description
+    groupName
+    day
+    contact
+    phone
     createdAt
     updatedAt
     __typename
   }
 }
 ` as GeneratedMutation<
-  APITypes.DeleteTodoMutationVariables,
-  APITypes.DeleteTodoMutation
+  APITypes.DeleteOnCallEntryMutationVariables,
+  APITypes.DeleteOnCallEntryMutation
+>;
+export const createContact = /* GraphQL */ `mutation CreateContact(
+  $input: CreateContactInput!
+  $condition: ModelContactConditionInput
+) {
+  createContact(input: $input, condition: $condition) {
+    id
+    email
+    phone
+    name
+    onCall
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.CreateContactMutationVariables,
+  APITypes.CreateContactMutation
+>;
+export const updateContact = /* GraphQL */ `mutation UpdateContact(
+  $input: UpdateContactInput!
+  $condition: ModelContactConditionInput
+) {
+  updateContact(input: $input, condition: $condition) {
+    id
+    email
+    phone
+    name
+    onCall
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.UpdateContactMutationVariables,
+  APITypes.UpdateContactMutation
+>;
+export const deleteContact = /* GraphQL */ `mutation DeleteContact(
+  $input: DeleteContactInput!
+  $condition: ModelContactConditionInput
+) {
+  deleteContact(input: $input, condition: $condition) {
+    id
+    email
+    phone
+    name
+    onCall
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.DeleteContactMutationVariables,
+  APITypes.DeleteContactMutation
 >;

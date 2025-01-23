@@ -1,25 +1,44 @@
-
 <template src="./OnCallApplication.html"></template>
 <script setup lang="ts">
-import '@/assets/main.css';
-import { ref, onMounted, defineProps } from 'vue';
+import { ref, onMounted } from 'vue';
+import { generateClient } from '@aws-amplify/api';
+import { graphqlOperation } from '@aws-amplify/api-graphql';
+import { listOnCallEntries, listContacts } from '@/graphql/queries';
+import { createOnCallEntry, updateOnCallEntry, deleteOnCallEntry } from '@/graphql/mutations';
 import { format, startOfMonth, endOfMonth, eachDayOfInterval } from 'date-fns';
+import type { GraphQLResult } from '@aws-amplify/api-graphql'; // Use type-only import
+
+// Create the client instance
+const client = generateClient();
+
+// Define the OnCallEntry interface
 interface OnCallEntry {
+  id?: string;
   groupName: string;
   day: string;
   contact: string;
   phone: string;
 }
-const props = defineProps<{ signOut: () => void }>();
+
+// Define the Contact interface
+interface Contact {
+  id: string;
+  email: string;
+  phone: string;
+  name: string;
+  onCall: boolean;
+}
+
+// Define props
+const props = defineProps<{ signOut: () => void, user: any }>();
+
+// Define refs for reactive data
 const activeTab = ref('schedule');
 const showModal = ref(false);
 const editIndex = ref<number | null>(null);
-const form = ref({ email: '', phone: '', name: '', onCall: false });
+const form = ref<Contact>({ id: '', email: '', phone: '', name: '', onCall: false });
 const errorMessage = ref('');
-const contacts = ref([
-  { email: 'jeffrey@example.com', phone: '+31627296098', name: 'Jeffrey van de...', onCall: true },
-  { email: 'scott@example.com', phone: '+447785294418', name: 'Scott Beaton', onCall: false },
-]);
+const contacts = ref<Contact[]>([]);
 const onCallList = ref<OnCallEntry[]>([]);
 const timeOptions = ref(generateTimeOptions());
 const timezoneOptions = ref(['GMT', 'EST', 'PST', 'BST', 'CET']);
@@ -27,6 +46,17 @@ const selectedTimezone = ref('GMT');
 const startTime = ref('');
 const selectedMonth = ref(new Date().getMonth());
 const selectedYear = ref(new Date().getFullYear());
+const isAdmin = ref(false); // Add a ref to track if the user is an admin
+
+// Define months and years arrays
+const months = [
+  'January', 'February', 'March', 'April', 'May', 'June',
+  'July', 'August', 'September', 'October', 'November', 'December'
+];
+
+const years = Array.from({ length: 10 }, (_, i) => new Date().getFullYear() - i);
+
+// Generate time options
 function generateTimeOptions() {
   const times = [];
   for (let i = 0; i < 24; i++) {
@@ -38,46 +68,72 @@ function generateTimeOptions() {
   }
   return times;
 }
-const updatePhoneNumber = (index: number) => {
-  const selectedContact = contacts.value.find(contact => contact.name === onCallList.value[index].contact);
-  if (selectedContact) {
-    onCallList.value[index].phone = selectedContact.phone;
-  }
-};
-const openModal = (event: MouseEvent, index: number | null = null) => {
-  event.preventDefault();
-  if (index !== null) {
-    form.value = { ...contacts.value[index] };
-    editIndex.value = index;
+
+// Fetch data from the backend
+const fetchContacts = async () => {
+  console.log("Fetching contacts...");
+  const result = await client.graphql(graphqlOperation(listContacts)) as GraphQLResult<any>;
+  if (result.data) {
+    contacts.value = result.data.listContacts.items;
+    console.log("Contacts fetched:", contacts.value);
   } else {
-    form.value = { email: '', phone: '', name: '', onCall: false };
-    editIndex.value = null;
+    console.error("Error fetching contacts:", result.errors);
   }
-  showModal.value = true;
-  errorMessage.value = '';
 };
-const saveContacts = () => {
-  localStorage.setItem('contacts', JSON.stringify(contacts.value));
+
+const fetchOnCallEntries = async () => {
+  console.log("Fetching on-call entries...");
+  const result = await client.graphql(graphqlOperation(listOnCallEntries)) as GraphQLResult<any>;
+  if (result.data) {
+    onCallList.value = result.data.listOnCallEntries.items;
+    console.log("On-call entries fetched:", onCallList.value);
+  } else {
+    console.error("Error fetching on-call entries:", result.errors);
+  }
 };
-const saveContact = () => {
+
+// Save contact to the backend
+const saveContact = async () => {
   const e164Regex = /^\+?[1-9]\d{1,14}$/;
   if (!e164Regex.test(form.value.phone)) {
     errorMessage.value = 'Please enter a valid E.164 phone number.';
     return;
   }
-  if (editIndex.value !== null) {
-    contacts.value[editIndex.value] = { ...form.value };
-  } else {
-    contacts.value.push({ ...form.value });
+  try {
+    if (editIndex.value !== null) {
+      await client.graphql(graphqlOperation(updateOnCallEntry, { input: form.value }));
+    } else {
+      await client.graphql(graphqlOperation(createOnCallEntry, { input: form.value }));
+    }
+    showModal.value = false;
+    await fetchContacts();
+  } catch (error) {
+    console.error("Error saving contact:", error);
+    errorMessage.value = 'An error occurred while saving the contact.';
   }
-  showModal.value = false;
-  saveContacts();
 };
-const deleteContact = (index: number) => {
-  contacts.value.splice(index, 1);
-  saveContacts();
+
+// Delete contact from the backend
+const deleteContact = async (index: number) => {
+  try {
+    await client.graphql(graphqlOperation(deleteOnCallEntry, { input: { id: contacts.value[index].id } }));
+    await fetchContacts();
+  } catch (error) {
+    console.error("Error deleting contact:", error);
+    errorMessage.value = 'An error occurred while deleting the contact.';
+  }
 };
-const generateCalendar = () => {
+
+// Update phone number based on selected contact
+const updatePhoneNumber = (index: number) => {
+  const contact = contacts.value.find(c => c.name === onCallList.value[index].contact);
+  if (contact) {
+    onCallList.value[index].phone = contact.phone;
+  }
+};
+
+// Generate the calendar
+const generateCalendar = async () => {
   const now = new Date(selectedYear.value, selectedMonth.value);
   const start = startOfMonth(now);
   const end = endOfMonth(now);
@@ -88,42 +144,50 @@ const generateCalendar = () => {
     contact: '',
     phone: ''
   }));
-  loadSchedule();
+  await fetchOnCallEntries();
 };
-const saveSchedule = () => {
-  const confirmation = confirm('Are you sure you want to save these changes?');
-  if (!confirmation) return;
-  const schedule = {
-    timezone: selectedTimezone.value,
-    startTime: startTime.value,
-    onCallList: onCallList.value,
-  };
-  localStorage.setItem(`schedule-${selectedYear.value}-${selectedMonth.value}`, JSON.stringify(schedule));
-  console.log('Schedule saved:', schedule);
+
+// Check if the user is an admin
+const checkAdmin = () => {
+  if (props.user && props.user.signInUserSession && props.user.signInUserSession.accessToken) {
+    isAdmin.value = props.user.signInUserSession.accessToken.payload["cognito:groups"].includes("TerneuzenAdmin");
+  }
 };
-const loadSchedule = () => {
-  const savedSchedule = localStorage.getItem(`schedule-${selectedYear.value}-${selectedMonth.value}`);
-  if (savedSchedule) {
-    const schedule = JSON.parse(savedSchedule);
-    selectedTimezone.value = schedule.timezone;
-    startTime.value = schedule.startTime;
-    onCallList.value.forEach(entry => {
-      const savedEntry = schedule.onCallList.find((e: OnCallEntry) => e.day === entry.day);
-      if (savedEntry) {
-        entry.contact = savedEntry.contact;
-        entry.phone = savedEntry.phone;
+
+// Open modal for adding or editing contact
+const openModal = (event: Event, index: number | null = null) => {
+  editIndex.value = index;
+  if (index !== null) {
+    form.value = { ...contacts.value[index] };
+  } else {
+    form.value = { id: '', email: '', phone: '', name: '', onCall: false };
+  }
+  showModal.value = true;
+};
+
+// Save schedule to the backend
+const saveSchedule = async () => {
+  try {
+    const promises = onCallList.value.map(entry => {
+      if (entry.id) {
+        return client.graphql(graphqlOperation(updateOnCallEntry, { input: entry }));
+      } else {
+        return client.graphql(graphqlOperation(createOnCallEntry, { input: entry }));
       }
     });
+    await Promise.all(promises);
+    console.log("Schedule saved successfully.");
+  } catch (error) {
+    console.error("Error saving schedule:", error);
   }
 };
-const months = Array.from({ length: 12 }, (_, i) => new Date(0, i).toLocaleString('default', { month: 'long' }));
-const years = Array.from({ length: 10 }, (_, i) => new Date().getFullYear() + i);
+
+// Lifecycle hook
 onMounted(() => {
-  const savedContacts = localStorage.getItem('contacts');
-  if (savedContacts) {
-    contacts.value = JSON.parse(savedContacts);
-  }
+  console.log('Component mounted');
+  fetchContacts();
   generateCalendar();
+  checkAdmin(); // Check if the user is an admin
 });
 </script>
 <style src="./OnCallApplication.css" scoped></style>

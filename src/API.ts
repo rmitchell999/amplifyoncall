@@ -2,18 +2,22 @@
 /* eslint-disable */
 //  This file was automatically generated and should not be edited.
 
-export type CreateTodoInput = {
+export type CreateOnCallEntryInput = {
   id?: string | null,
-  name: string,
-  description?: string | null,
+  groupName: string,
+  day: string,
+  contact: string,
+  phone: string,
 };
 
-export type ModelTodoConditionInput = {
-  name?: ModelStringInput | null,
-  description?: ModelStringInput | null,
-  and?: Array< ModelTodoConditionInput | null > | null,
-  or?: Array< ModelTodoConditionInput | null > | null,
-  not?: ModelTodoConditionInput | null,
+export type ModelOnCallEntryConditionInput = {
+  groupName?: ModelStringInput | null,
+  day?: ModelStringInput | null,
+  contact?: ModelStringInput | null,
+  phone?: ModelStringInput | null,
+  and?: Array< ModelOnCallEntryConditionInput | null > | null,
+  or?: Array< ModelOnCallEntryConditionInput | null > | null,
+  not?: ModelOnCallEntryConditionInput | null,
   createdAt?: ModelStringInput | null,
   updatedAt?: ModelStringInput | null,
 };
@@ -58,34 +62,90 @@ export type ModelSizeInput = {
   between?: Array< number | null > | null,
 };
 
-export type Todo = {
-  __typename: "Todo",
+export type OnCallEntry = {
+  __typename: "OnCallEntry",
   id: string,
-  name: string,
-  description?: string | null,
+  groupName: string,
+  day: string,
+  contact: string,
+  phone: string,
   createdAt: string,
   updatedAt: string,
 };
 
-export type UpdateTodoInput = {
+export type UpdateOnCallEntryInput = {
   id: string,
-  name?: string | null,
-  description?: string | null,
+  groupName?: string | null,
+  day?: string | null,
+  contact?: string | null,
+  phone?: string | null,
 };
 
-export type DeleteTodoInput = {
+export type DeleteOnCallEntryInput = {
   id: string,
 };
 
-export type ModelTodoFilterInput = {
-  id?: ModelIDInput | null,
+export type CreateContactInput = {
+  id?: string | null,
+  email: string,
+  phone: string,
+  name: string,
+  onCall: boolean,
+};
+
+export type ModelContactConditionInput = {
+  email?: ModelStringInput | null,
+  phone?: ModelStringInput | null,
   name?: ModelStringInput | null,
-  description?: ModelStringInput | null,
+  onCall?: ModelBooleanInput | null,
+  and?: Array< ModelContactConditionInput | null > | null,
+  or?: Array< ModelContactConditionInput | null > | null,
+  not?: ModelContactConditionInput | null,
   createdAt?: ModelStringInput | null,
   updatedAt?: ModelStringInput | null,
-  and?: Array< ModelTodoFilterInput | null > | null,
-  or?: Array< ModelTodoFilterInput | null > | null,
-  not?: ModelTodoFilterInput | null,
+};
+
+export type ModelBooleanInput = {
+  ne?: boolean | null,
+  eq?: boolean | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+};
+
+export type Contact = {
+  __typename: "Contact",
+  id: string,
+  email: string,
+  phone: string,
+  name: string,
+  onCall: boolean,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type UpdateContactInput = {
+  id: string,
+  email?: string | null,
+  phone?: string | null,
+  name?: string | null,
+  onCall?: boolean | null,
+};
+
+export type DeleteContactInput = {
+  id: string,
+};
+
+export type ModelOnCallEntryFilterInput = {
+  id?: ModelIDInput | null,
+  groupName?: ModelStringInput | null,
+  day?: ModelStringInput | null,
+  contact?: ModelStringInput | null,
+  phone?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  and?: Array< ModelOnCallEntryFilterInput | null > | null,
+  or?: Array< ModelOnCallEntryFilterInput | null > | null,
+  not?: ModelOnCallEntryFilterInput | null,
 };
 
 export type ModelIDInput = {
@@ -104,20 +164,41 @@ export type ModelIDInput = {
   size?: ModelSizeInput | null,
 };
 
-export type ModelTodoConnection = {
-  __typename: "ModelTodoConnection",
-  items:  Array<Todo | null >,
+export type ModelOnCallEntryConnection = {
+  __typename: "ModelOnCallEntryConnection",
+  items:  Array<OnCallEntry | null >,
   nextToken?: string | null,
 };
 
-export type ModelSubscriptionTodoFilterInput = {
+export type ModelContactFilterInput = {
+  id?: ModelIDInput | null,
+  email?: ModelStringInput | null,
+  phone?: ModelStringInput | null,
+  name?: ModelStringInput | null,
+  onCall?: ModelBooleanInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  and?: Array< ModelContactFilterInput | null > | null,
+  or?: Array< ModelContactFilterInput | null > | null,
+  not?: ModelContactFilterInput | null,
+};
+
+export type ModelContactConnection = {
+  __typename: "ModelContactConnection",
+  items:  Array<Contact | null >,
+  nextToken?: string | null,
+};
+
+export type ModelSubscriptionOnCallEntryFilterInput = {
   id?: ModelSubscriptionIDInput | null,
-  name?: ModelSubscriptionStringInput | null,
-  description?: ModelSubscriptionStringInput | null,
+  groupName?: ModelSubscriptionStringInput | null,
+  day?: ModelSubscriptionStringInput | null,
+  contact?: ModelSubscriptionStringInput | null,
+  phone?: ModelSubscriptionStringInput | null,
   createdAt?: ModelSubscriptionStringInput | null,
   updatedAt?: ModelSubscriptionStringInput | null,
-  and?: Array< ModelSubscriptionTodoFilterInput | null > | null,
-  or?: Array< ModelSubscriptionTodoFilterInput | null > | null,
+  and?: Array< ModelSubscriptionOnCallEntryFilterInput | null > | null,
+  or?: Array< ModelSubscriptionOnCallEntryFilterInput | null > | null,
 };
 
 export type ModelSubscriptionIDInput = {
@@ -150,83 +231,164 @@ export type ModelSubscriptionStringInput = {
   notIn?: Array< string | null > | null,
 };
 
-export type CreateTodoMutationVariables = {
-  input: CreateTodoInput,
-  condition?: ModelTodoConditionInput | null,
+export type ModelSubscriptionContactFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  email?: ModelSubscriptionStringInput | null,
+  phone?: ModelSubscriptionStringInput | null,
+  name?: ModelSubscriptionStringInput | null,
+  onCall?: ModelSubscriptionBooleanInput | null,
+  createdAt?: ModelSubscriptionStringInput | null,
+  updatedAt?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionContactFilterInput | null > | null,
+  or?: Array< ModelSubscriptionContactFilterInput | null > | null,
 };
 
-export type CreateTodoMutation = {
-  createTodo?:  {
-    __typename: "Todo",
+export type ModelSubscriptionBooleanInput = {
+  ne?: boolean | null,
+  eq?: boolean | null,
+};
+
+export type CreateOnCallEntryMutationVariables = {
+  input: CreateOnCallEntryInput,
+  condition?: ModelOnCallEntryConditionInput | null,
+};
+
+export type CreateOnCallEntryMutation = {
+  createOnCallEntry?:  {
+    __typename: "OnCallEntry",
     id: string,
-    name: string,
-    description?: string | null,
+    groupName: string,
+    day: string,
+    contact: string,
+    phone: string,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type UpdateTodoMutationVariables = {
-  input: UpdateTodoInput,
-  condition?: ModelTodoConditionInput | null,
+export type UpdateOnCallEntryMutationVariables = {
+  input: UpdateOnCallEntryInput,
+  condition?: ModelOnCallEntryConditionInput | null,
 };
 
-export type UpdateTodoMutation = {
-  updateTodo?:  {
-    __typename: "Todo",
+export type UpdateOnCallEntryMutation = {
+  updateOnCallEntry?:  {
+    __typename: "OnCallEntry",
     id: string,
-    name: string,
-    description?: string | null,
+    groupName: string,
+    day: string,
+    contact: string,
+    phone: string,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type DeleteTodoMutationVariables = {
-  input: DeleteTodoInput,
-  condition?: ModelTodoConditionInput | null,
+export type DeleteOnCallEntryMutationVariables = {
+  input: DeleteOnCallEntryInput,
+  condition?: ModelOnCallEntryConditionInput | null,
 };
 
-export type DeleteTodoMutation = {
-  deleteTodo?:  {
-    __typename: "Todo",
+export type DeleteOnCallEntryMutation = {
+  deleteOnCallEntry?:  {
+    __typename: "OnCallEntry",
     id: string,
-    name: string,
-    description?: string | null,
+    groupName: string,
+    day: string,
+    contact: string,
+    phone: string,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type GetTodoQueryVariables = {
+export type CreateContactMutationVariables = {
+  input: CreateContactInput,
+  condition?: ModelContactConditionInput | null,
+};
+
+export type CreateContactMutation = {
+  createContact?:  {
+    __typename: "Contact",
+    id: string,
+    email: string,
+    phone: string,
+    name: string,
+    onCall: boolean,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateContactMutationVariables = {
+  input: UpdateContactInput,
+  condition?: ModelContactConditionInput | null,
+};
+
+export type UpdateContactMutation = {
+  updateContact?:  {
+    __typename: "Contact",
+    id: string,
+    email: string,
+    phone: string,
+    name: string,
+    onCall: boolean,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteContactMutationVariables = {
+  input: DeleteContactInput,
+  condition?: ModelContactConditionInput | null,
+};
+
+export type DeleteContactMutation = {
+  deleteContact?:  {
+    __typename: "Contact",
+    id: string,
+    email: string,
+    phone: string,
+    name: string,
+    onCall: boolean,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type GetOnCallEntryQueryVariables = {
   id: string,
 };
 
-export type GetTodoQuery = {
-  getTodo?:  {
-    __typename: "Todo",
+export type GetOnCallEntryQuery = {
+  getOnCallEntry?:  {
+    __typename: "OnCallEntry",
     id: string,
-    name: string,
-    description?: string | null,
+    groupName: string,
+    day: string,
+    contact: string,
+    phone: string,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type ListTodosQueryVariables = {
-  filter?: ModelTodoFilterInput | null,
+export type ListOnCallEntriesQueryVariables = {
+  filter?: ModelOnCallEntryFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
 };
 
-export type ListTodosQuery = {
-  listTodos?:  {
-    __typename: "ModelTodoConnection",
+export type ListOnCallEntriesQuery = {
+  listOnCallEntries?:  {
+    __typename: "ModelOnCallEntryConnection",
     items:  Array< {
-      __typename: "Todo",
+      __typename: "OnCallEntry",
       id: string,
-      name: string,
-      description?: string | null,
+      groupName: string,
+      day: string,
+      contact: string,
+      phone: string,
       createdAt: string,
       updatedAt: string,
     } | null >,
@@ -234,46 +396,143 @@ export type ListTodosQuery = {
   } | null,
 };
 
-export type OnCreateTodoSubscriptionVariables = {
-  filter?: ModelSubscriptionTodoFilterInput | null,
+export type GetContactQueryVariables = {
+  id: string,
 };
 
-export type OnCreateTodoSubscription = {
-  onCreateTodo?:  {
-    __typename: "Todo",
+export type GetContactQuery = {
+  getContact?:  {
+    __typename: "Contact",
     id: string,
+    email: string,
+    phone: string,
     name: string,
-    description?: string | null,
+    onCall: boolean,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type OnUpdateTodoSubscriptionVariables = {
-  filter?: ModelSubscriptionTodoFilterInput | null,
+export type ListContactsQueryVariables = {
+  filter?: ModelContactFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
 };
 
-export type OnUpdateTodoSubscription = {
-  onUpdateTodo?:  {
-    __typename: "Todo",
+export type ListContactsQuery = {
+  listContacts?:  {
+    __typename: "ModelContactConnection",
+    items:  Array< {
+      __typename: "Contact",
+      id: string,
+      email: string,
+      phone: string,
+      name: string,
+      onCall: boolean,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type OnCreateOnCallEntrySubscriptionVariables = {
+  filter?: ModelSubscriptionOnCallEntryFilterInput | null,
+};
+
+export type OnCreateOnCallEntrySubscription = {
+  onCreateOnCallEntry?:  {
+    __typename: "OnCallEntry",
     id: string,
-    name: string,
-    description?: string | null,
+    groupName: string,
+    day: string,
+    contact: string,
+    phone: string,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type OnDeleteTodoSubscriptionVariables = {
-  filter?: ModelSubscriptionTodoFilterInput | null,
+export type OnUpdateOnCallEntrySubscriptionVariables = {
+  filter?: ModelSubscriptionOnCallEntryFilterInput | null,
 };
 
-export type OnDeleteTodoSubscription = {
-  onDeleteTodo?:  {
-    __typename: "Todo",
+export type OnUpdateOnCallEntrySubscription = {
+  onUpdateOnCallEntry?:  {
+    __typename: "OnCallEntry",
     id: string,
+    groupName: string,
+    day: string,
+    contact: string,
+    phone: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteOnCallEntrySubscriptionVariables = {
+  filter?: ModelSubscriptionOnCallEntryFilterInput | null,
+};
+
+export type OnDeleteOnCallEntrySubscription = {
+  onDeleteOnCallEntry?:  {
+    __typename: "OnCallEntry",
+    id: string,
+    groupName: string,
+    day: string,
+    contact: string,
+    phone: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateContactSubscriptionVariables = {
+  filter?: ModelSubscriptionContactFilterInput | null,
+};
+
+export type OnCreateContactSubscription = {
+  onCreateContact?:  {
+    __typename: "Contact",
+    id: string,
+    email: string,
+    phone: string,
     name: string,
-    description?: string | null,
+    onCall: boolean,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateContactSubscriptionVariables = {
+  filter?: ModelSubscriptionContactFilterInput | null,
+};
+
+export type OnUpdateContactSubscription = {
+  onUpdateContact?:  {
+    __typename: "Contact",
+    id: string,
+    email: string,
+    phone: string,
+    name: string,
+    onCall: boolean,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteContactSubscriptionVariables = {
+  filter?: ModelSubscriptionContactFilterInput | null,
+};
+
+export type OnDeleteContactSubscription = {
+  onDeleteContact?:  {
+    __typename: "Contact",
+    id: string,
+    email: string,
+    phone: string,
+    name: string,
+    onCall: boolean,
     createdAt: string,
     updatedAt: string,
   } | null,
