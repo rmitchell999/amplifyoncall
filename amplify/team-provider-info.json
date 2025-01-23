@@ -13,7 +13,8 @@
     },
     "categories": {
       "auth": {
-        "amplifyoncall361d2ced": {}
+        "amplifyoncall361d2ced": {},
+        "userPoolGroups": {}
       },
       "function": {
         "S3Trigger446736ca": {

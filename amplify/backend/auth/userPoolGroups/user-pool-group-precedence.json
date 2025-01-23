@@ -1,0 +1,10 @@
+[
+  {
+    "groupName": "TerneuzenAdmin",
+    "precedence": 1
+  },
+  {
+    "groupName": "TerneuzenReadOnly",
+    "precedence": 2
+  }
+]
