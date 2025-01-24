@@ -1,10 +1,71 @@
 [
   {
     "groupName": "TerneuzenAdmin",
-    "precedence": 1
+    "precedence": 1,
+    "customPolicies": [
+      {
+        "PolicyName": "terneuzen-admin-policy",
+        "PolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Sid": "statement1",
+              "Effect": "Allow",
+              "Action": [
+                "dynamodb:PutItem",
+                "dynamodb:UpdateItem",
+                "dynamodb:DeleteItem",
+                "dynamodb:GetItem",
+                "dynamodb:Query"
+              ],
+              "Resource": [
+                "arn:aws:dynamodb:us-west-1:650251713968:table/AmplifyDataStore-fedvz7rozbhozk37fmmqs4fytj-dev",
+                "arn:aws:dynamodb:us-west-1:650251713968:table/Contact-fedvz7rozbhozk37fmmqs4fytj-dev",
+                "arn:aws:dynamodb:us-west-1:650251713968:table/OnCallSchedule-fedvz7rozbhozk37fmmqs4fytj-dev",
+                "arn:aws:dynamodb:us-west-1:650251713968:table/OnCallScheduleContact-fedvz7rozbhozk37fmmqs4fytj-dev"
+              ]
+            },
+            {
+              "Sid": "statement2",
+              "Effect": "Allow",
+              "Action": [
+                "s3:CreateBucket"
+              ],
+              "Resource": [
+                "arn:aws:s3:::*"
+              ]
+            }
+          ]
+        }
+      }
+    ]
   },
   {
     "groupName": "TerneuzenReadOnly",
-    "precedence": 2
+    "precedence": 2,
+    "customPolicies": [
+      {
+        "PolicyName": "terneuzen-readonly-policy",
+        "PolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Sid": "statement1",
+              "Effect": "Allow",
+              "Action": [
+                "dynamodb:GetItem",
+                "dynamodb:Query"
+              ],
+              "Resource": [
+                "arn:aws:dynamodb:us-west-1:650251713968:table/AmplifyDataStore-fedvz7rozbhozk37fmmqs4fytj-dev",
+                "arn:aws:dynamodb:us-west-1:650251713968:table/Contact-fedvz7rozbhozk37fmmqs4fytj-dev",
+                "arn:aws:dynamodb:us-west-1:650251713968:table/OnCallSchedule-fedvz7rozbhozk37fmmqs4fytj-dev",
+                "arn:aws:dynamodb:us-west-1:650251713968:table/OnCallScheduleContact-fedvz7rozbhozk37fmmqs4fytj-dev"
+              ]
+            }
+          ]
+        }
+      }
+    ]
   }
 ]

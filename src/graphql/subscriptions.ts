@@ -8,59 +8,44 @@ type GeneratedSubscription<InputType, OutputType> = string & {
   __generatedSubscriptionOutput: OutputType;
 };
 
-export const onCreateOnCallEntry = /* GraphQL */ `subscription OnCreateOnCallEntry(
-  $filter: ModelSubscriptionOnCallEntryFilterInput
-) {
-  onCreateOnCallEntry(filter: $filter) {
+export const onCreateTodo = /* GraphQL */ `subscription OnCreateTodo($filter: ModelSubscriptionTodoFilterInput) {
+  onCreateTodo(filter: $filter) {
     id
-    groupName
-    day
-    contact
-    phone
+    content
     createdAt
     updatedAt
     __typename
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnCreateOnCallEntrySubscriptionVariables,
-  APITypes.OnCreateOnCallEntrySubscription
+  APITypes.OnCreateTodoSubscriptionVariables,
+  APITypes.OnCreateTodoSubscription
 >;
-export const onUpdateOnCallEntry = /* GraphQL */ `subscription OnUpdateOnCallEntry(
-  $filter: ModelSubscriptionOnCallEntryFilterInput
-) {
-  onUpdateOnCallEntry(filter: $filter) {
+export const onUpdateTodo = /* GraphQL */ `subscription OnUpdateTodo($filter: ModelSubscriptionTodoFilterInput) {
+  onUpdateTodo(filter: $filter) {
     id
-    groupName
-    day
-    contact
-    phone
+    content
     createdAt
     updatedAt
     __typename
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnUpdateOnCallEntrySubscriptionVariables,
-  APITypes.OnUpdateOnCallEntrySubscription
+  APITypes.OnUpdateTodoSubscriptionVariables,
+  APITypes.OnUpdateTodoSubscription
 >;
-export const onDeleteOnCallEntry = /* GraphQL */ `subscription OnDeleteOnCallEntry(
-  $filter: ModelSubscriptionOnCallEntryFilterInput
-) {
-  onDeleteOnCallEntry(filter: $filter) {
+export const onDeleteTodo = /* GraphQL */ `subscription OnDeleteTodo($filter: ModelSubscriptionTodoFilterInput) {
+  onDeleteTodo(filter: $filter) {
     id
-    groupName
-    day
-    contact
-    phone
+    content
     createdAt
     updatedAt
     __typename
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnDeleteOnCallEntrySubscriptionVariables,
-  APITypes.OnDeleteOnCallEntrySubscription
+  APITypes.OnDeleteTodoSubscriptionVariables,
+  APITypes.OnDeleteTodoSubscription
 >;
 export const onCreateContact = /* GraphQL */ `subscription OnCreateContact($filter: ModelSubscriptionContactFilterInput) {
   onCreateContact(filter: $filter) {
@@ -109,4 +94,88 @@ export const onDeleteContact = /* GraphQL */ `subscription OnDeleteContact($filt
 ` as GeneratedSubscription<
   APITypes.OnDeleteContactSubscriptionVariables,
   APITypes.OnDeleteContactSubscription
+>;
+export const onCreateOnCallEntry = /* GraphQL */ `subscription OnCreateOnCallEntry(
+  $filter: ModelSubscriptionOnCallEntryFilterInput
+) {
+  onCreateOnCallEntry(filter: $filter) {
+    id
+    groupName
+    day
+    contactID
+    contact {
+      id
+      email
+      phone
+      name
+      onCall
+      createdAt
+      updatedAt
+      __typename
+    }
+    phone
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnCreateOnCallEntrySubscriptionVariables,
+  APITypes.OnCreateOnCallEntrySubscription
+>;
+export const onUpdateOnCallEntry = /* GraphQL */ `subscription OnUpdateOnCallEntry(
+  $filter: ModelSubscriptionOnCallEntryFilterInput
+) {
+  onUpdateOnCallEntry(filter: $filter) {
+    id
+    groupName
+    day
+    contactID
+    contact {
+      id
+      email
+      phone
+      name
+      onCall
+      createdAt
+      updatedAt
+      __typename
+    }
+    phone
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnUpdateOnCallEntrySubscriptionVariables,
+  APITypes.OnUpdateOnCallEntrySubscription
+>;
+export const onDeleteOnCallEntry = /* GraphQL */ `subscription OnDeleteOnCallEntry(
+  $filter: ModelSubscriptionOnCallEntryFilterInput
+) {
+  onDeleteOnCallEntry(filter: $filter) {
+    id
+    groupName
+    day
+    contactID
+    contact {
+      id
+      email
+      phone
+      name
+      onCall
+      createdAt
+      updatedAt
+      __typename
+    }
+    phone
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnDeleteOnCallEntrySubscriptionVariables,
+  APITypes.OnDeleteOnCallEntrySubscription
 >;

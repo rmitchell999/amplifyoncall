@@ -1,8 +1,7 @@
 <template src="./OnCallApplication.html"></template>
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-import { generateClient } from '@aws-amplify/api';
-import { graphqlOperation } from '@aws-amplify/api-graphql';
+import { generateClient } from 'aws-amplify/api';
 import { listOnCallEntries, listContacts } from '@/graphql/queries';
 import { createOnCallEntry, updateOnCallEntry, deleteOnCallEntry } from '@/graphql/mutations';
 import { format, startOfMonth, endOfMonth, eachDayOfInterval } from 'date-fns';
@@ -18,6 +17,7 @@ interface OnCallEntry {
   day: string;
   contact: string;
   phone: string;
+  contactID: string;
 }
 
 // Define the Contact interface
@@ -72,7 +72,9 @@ function generateTimeOptions() {
 // Fetch data from the backend
 const fetchContacts = async () => {
   console.log("Fetching contacts...");
-  const result = await client.graphql(graphqlOperation(listContacts)) as GraphQLResult<any>;
+  const result = await client.graphql({
+    query: listContacts
+  }) as GraphQLResult<any>;
   if (result.data) {
     contacts.value = result.data.listContacts.items;
     console.log("Contacts fetched:", contacts.value);
@@ -83,7 +85,9 @@ const fetchContacts = async () => {
 
 const fetchOnCallEntries = async () => {
   console.log("Fetching on-call entries...");
-  const result = await client.graphql(graphqlOperation(listOnCallEntries)) as GraphQLResult<any>;
+  const result = await client.graphql({
+    query: listOnCallEntries
+  }) as GraphQLResult<any>;
   if (result.data) {
     onCallList.value = result.data.listOnCallEntries.items;
     console.log("On-call entries fetched:", onCallList.value);
@@ -101,9 +105,15 @@ const saveContact = async () => {
   }
   try {
     if (editIndex.value !== null) {
-      await client.graphql(graphqlOperation(updateOnCallEntry, { input: form.value }));
+      await client.graphql({
+        query: updateOnCallEntry,
+        variables: { input: { ...form.value, contactID: form.value.id, groupName: 'DefaultGroupName', day: '2021-01-01', id: form.value.id! } } // Ensure all required fields are included, ensure id is present
+      });
     } else {
-      await client.graphql(graphqlOperation(createOnCallEntry, { input: form.value }));
+      await client.graphql({
+        query: createOnCallEntry,
+        variables: { input: { ...form.value, contactID: form.value.id, groupName: 'DefaultGroupName', day: '2021-01-01' } } // Ensure all required fields are included
+      });
     }
     showModal.value = false;
     await fetchContacts();
@@ -116,7 +126,10 @@ const saveContact = async () => {
 // Delete contact from the backend
 const deleteContact = async (index: number) => {
   try {
-    await client.graphql(graphqlOperation(deleteOnCallEntry, { input: { id: contacts.value[index].id } }));
+    await client.graphql({
+      query: deleteOnCallEntry,
+      variables: { input: { id: contacts.value[index].id } }
+    });
     await fetchContacts();
   } catch (error) {
     console.error("Error deleting contact:", error);
@@ -142,7 +155,8 @@ const generateCalendar = async () => {
     groupName: 'Terneuzen',
     day: format(day, 'EEEE dd-MM-yyyy'),
     contact: '',
-    phone: ''
+    phone: '',
+    contactID: '' // Initialize contactID
   }));
   await fetchOnCallEntries();
 };
@@ -150,7 +164,9 @@ const generateCalendar = async () => {
 // Check if the user is an admin
 const checkAdmin = () => {
   if (props.user && props.user.signInUserSession && props.user.signInUserSession.accessToken) {
-    isAdmin.value = props.user.signInUserSession.accessToken.payload["cognito:groups"].includes("TerneuzenAdmin");
+    const payload = props.user.signInUserSession.accessToken.payload;
+    console.log("Access Token Payload:", payload);
+    isAdmin.value = payload["cognito:groups"] && payload["cognito:groups"].includes("TerneuzenAdmin");
   }
 };
 
@@ -170,9 +186,15 @@ const saveSchedule = async () => {
   try {
     const promises = onCallList.value.map(entry => {
       if (entry.id) {
-        return client.graphql(graphqlOperation(updateOnCallEntry, { input: entry }));
+        return client.graphql({
+          query: updateOnCallEntry,
+          variables: { input: { ...entry, contactID: entry.contactID || '', groupName: entry.groupName || 'DefaultGroupName', day: entry.day || '2021-01-01', id: entry.id! } } // Ensure all required fields are included, ensure id is present
+        });
       } else {
-        return client.graphql(graphqlOperation(createOnCallEntry, { input: entry }));
+        return client.graphql({
+          query: createOnCallEntry,
+          variables: { input: { ...entry, contactID: entry.contactID || '', groupName: entry.groupName || 'DefaultGroupName', day: entry.day || '2021-01-01' } } // Ensure all required fields are included
+        });
       }
     });
     await Promise.all(promises);

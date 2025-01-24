@@ -105,6 +105,27 @@
           ],
           "category": "function",
           "resourceName": "S3Trigger446736ca"
+        },
+        {
+          "attributes": [
+            "UserPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "amplifyoncall361d2ced"
+        },
+        {
+          "attributes": [
+            "TerneuzenAdminGroupRole"
+          ],
+          "category": "auth",
+          "resourceName": "userPoolGroups"
+        },
+        {
+          "attributes": [
+            "TerneuzenReadOnlyGroupRole"
+          ],
+          "category": "auth",
+          "resourceName": "userPoolGroups"
         }
       ],
       "providerPlugin": "awscloudformation",

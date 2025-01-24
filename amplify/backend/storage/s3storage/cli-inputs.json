@@ -2,13 +2,24 @@
   "resourceName": "s3storage",
   "policyUUID": "eb37a481",
   "bucketName": "amplifyoncall0af15cffeb5b41f3ab44146b59b7f2f8",
-  "storageAccess": "auth",
-  "guestAccess": [],
+  "storageAccess": "authAndGuest",
+  "guestAccess": [
+    "READ"
+  ],
   "authAccess": [
     "CREATE_AND_UPDATE",
     "READ",
     "DELETE"
   ],
   "triggerFunction": "S3Trigger446736ca",
-  "groupAccess": {}
+  "groupAccess": {
+    "TerneuzenAdmin": [
+      "CREATE_AND_UPDATE",
+      "READ",
+      "DELETE"
+    ],
+    "TerneuzenReadOnly": [
+      "READ"
+    ]
+  }
 }
