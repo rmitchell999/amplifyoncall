@@ -1,3 +1,4 @@
+
 <template src="./OnCallApplication.html"></template>
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
@@ -13,9 +14,7 @@ import {
 import { format, startOfMonth, endOfMonth, eachDayOfInterval } from 'date-fns';
 import { fetchAuthSession, getCurrentUser } from 'aws-amplify/auth';
 import type { GraphQLResult } from '@aws-amplify/api-graphql';
-
 const client = generateClient();
-
 interface OnCallEntry {
   id?: string;
   groupName: string;
@@ -27,7 +26,6 @@ interface OnCallEntry {
   timezone?: string;
   selected?: boolean; // Add this property
 }
-
 interface Contact {
   id: string;
   email: string;
@@ -35,9 +33,7 @@ interface Contact {
   name: string;
   onCall: boolean;
 }
-
 const props = defineProps<{ signOut: () => void, user: any }>();
-
 const activeTab = ref('schedule');
 const showModal = ref(false);
 const editIndex = ref<number | null>(null);
@@ -50,23 +46,20 @@ const timezoneOptions = ref(['GMT', 'EST', 'PST', 'BST', 'CET']);
 const selectedMonth = ref(new Date().getMonth());
 const selectedYear = ref(new Date().getFullYear());
 const isAdmin = ref(false);
-
 // State to hold timezone and start time for each month
 const monthlySettings = ref<Record<number, { timezone: string; startTime: string }>>({});
-
+// Initialize default settings for each month
 for (let i = 0; i < 12; i++) {
   monthlySettings.value[i] = {
-    timezone: 'GMT',
-    startTime: '07:30'
+    timezone: 'GMT',   // Default timezone
+    startTime: '07:30' // Default start time
   };
 }
-
 const months = [
   'January', 'February', 'March', 'April', 'May', 'June',
   'July', 'August', 'September', 'October', 'November', 'December'
 ];
 const years = Array.from({ length: 10 }, (_, i) => new Date().getFullYear() - i);
-
 function generateTimeOptions() {
   const times = [];
   for (let i = 0; i < 24; i++) {
@@ -78,7 +71,6 @@ function generateTimeOptions() {
   }
   return times;
 }
-
 const fetchContacts = async () => {
   console.log("Fetching contacts...");
   try {
@@ -94,7 +86,6 @@ const fetchContacts = async () => {
     console.error("Error in fetchContacts:", error);
   }
 };
-
 const fetchOnCallEntries = async () => {
   console.log("Fetching on-call entries...");
   try {
@@ -110,11 +101,25 @@ const fetchOnCallEntries = async () => {
     console.error("Error in fetchOnCallEntries:", error);
   }
 };
-
 const saveContact = async () => {
-  const e164Regex = /^\+?[1-9]\d{1,14}$/;
-  if (!e164Regex.test(form.value.phone)) {
-    errorMessage.value = 'Please enter a valid E.164 phone number.';
+  const e164Regex = /^\+?[1-9]\d{1,14}$/; // E.164 format validation
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Basic email validation
+  
+  // Check if email format is valid
+  if (!emailRegex.test(form.value.email)) {
+    errorMessage.value = 'Please enter a valid email address.';
+    return;
+  }
+  // Check for duplicate names
+  const duplicateName = contacts.value.find(contact => contact.name.toLowerCase() === form.value.name.toLowerCase());
+  if (duplicateName) {
+    errorMessage.value = 'Contact with this name already exists.';
+    return;
+  }
+  // Check for duplicate phone numbers
+  const duplicatePhone = contacts.value.find(contact => contact.phone === form.value.phone);
+  if (duplicatePhone) {
+    errorMessage.value = 'Contact with this phone number already exists.';
     return;
   }
   try {
@@ -124,6 +129,7 @@ const saveContact = async () => {
       name: form.value.name,
       onCall: form.value.onCall
     };
+    
     if (editIndex.value !== null) {
       await client.graphql({
         query: updateContact,
@@ -142,12 +148,21 @@ const saveContact = async () => {
     errorMessage.value = 'An error occurred while saving the contact.';
   }
 };
-
 const deleteContact = async (index: number) => {
+  const contactIdToDelete = contacts.value[index].id; // Get the ID of the contact to be deleted
   try {
+    // Delete the contact from the database
     await client.graphql({
       query: deleteContactMutation,
-      variables: { input: { id: contacts.value[index].id } }
+      variables: { input: { id: contactIdToDelete } }
+    });
+    
+    // Update the onCallList to remove references to the deleted contact
+    onCallList.value.forEach(entry => {
+      if (entry.contactID === contactIdToDelete) {
+        entry.contactID = ''; // Clear the contactID
+        entry.phone = ''; // Clear the associated phone number
+      }
     });
     await fetchContacts();
   } catch (error) {
@@ -155,7 +170,6 @@ const deleteContact = async (index: number) => {
     errorMessage.value = 'An error occurred while deleting the contact.';
   }
 };
-
 const updatePhoneNumber = (index: number) => {
   const contactName = onCallList.value[index].contact;
   if (typeof contactName === 'string') {
@@ -165,26 +179,22 @@ const updatePhoneNumber = (index: number) => {
     }
   }
 };
-
 const generateCalendar = async () => {
   onCallList.value = []; 
-
   const now = new Date(selectedYear.value, selectedMonth.value);
   const start = startOfMonth(now);
   const end = endOfMonth(now);
   const days = eachDayOfInterval({ start, end });
-
   onCallList.value = days.map(day => ({
     id: undefined,
     groupName: 'Terneuzen',
     day: format(day, 'EEEE dd-MM-yyyy'),
     contactID: '',
     phone: '',
-    startTime: monthlySettings.value[selectedMonth.value].startTime,
-    timezone: monthlySettings.value[selectedMonth.value].timezone,
+    startTime: monthlySettings.value[selectedMonth.value].startTime, // Use monthly settings
+    timezone: monthlySettings.value[selectedMonth.value].timezone, // Use monthly settings
     selected: false // Initialize selected property
   }));
-
   try {
     const result = await client.graphql({ query: listOnCallEntries }) as GraphQLResult<{ listOnCallEntries: { items: OnCallEntry[] } }>;
     if (result.data?.listOnCallEntries?.items) {
@@ -200,16 +210,13 @@ const generateCalendar = async () => {
     console.error('Error fetching on-call entries:', error);
   }
 };
-
 const selectDay = (entry: OnCallEntry) => {
   entry.selected = !entry.selected;
-
   // Clear selection from other entries if only one can be active
   onCallList.value.forEach(item => {
     if (item !== entry) item.selected = false;
   });
 };
-
 const checkAdmin = async () => {
   try {
     const user = await getCurrentUser();
@@ -228,36 +235,31 @@ const checkAdmin = async () => {
     console.error("Error checking if user is admin:", error);
   }
 };
-
 const openModal = (index: number | null = null) => {
   editIndex.value = index;
   if (index !== null) {
-    form.value = { ...contacts.value[index] };
+    form.value = { ...contacts.value[index] }; // Load contact details for editing
   } else {
-    form.value = { id: '', email: '', phone: '', name: '', onCall: false };
+    form.value = { id: '', email: '', phone: '', name: '', onCall: false }; // Reset for new contact
   }
+  showModal.value = true; // Open the modal
 };
-
 // Function to fetch on-call entries
 const fetchAndReloadSchedule = async () => {
   await fetchOnCallEntries();
   await generateCalendar(); // Update the calendar after fetching
 };
-
 onMounted(async () => {
   console.log('Component mounted');
   try {
     await fetchContacts();
-    await fetchAndReloadSchedule();
-
-    // Load persisted settings for the selected month
-    loadSettings();
+    await fetchAndReloadSchedule(); // Fetch contacts and reload the schedule
+    loadSettings(); // Load monthly settings
     await checkAdmin();
   } catch (error) {
     console.error("Error during mounted hook:", error);
   }
 });
-
 const loadSettings = async () => {
   try {
     const result = await client.graphql({ query: listOnCallEntries });
@@ -266,8 +268,8 @@ const loadSettings = async () => {
       entries.forEach(entry => {
         const month = new Date(entry.day).getMonth(); // Get the month from the entry day
         monthlySettings.value[month] = {
-          timezone: entry.timezone || 'GMT', // Default to GMT if undefined
-          startTime: entry.startTime || '07:30' // Default to 07:30 if undefined
+          timezone: entry.timezone || 'GMT', // Use saved timezone or default to GMT
+          startTime: entry.startTime || '07:30' // Use saved start time or default to 07:30
         };
       });
     }
@@ -275,10 +277,8 @@ const loadSettings = async () => {
     console.error("Error loading settings:", error);
   }
 };
-
 const saveSchedule = async () => {
   if (!confirm('Are you sure you want to save the schedule?')) return;
-
   try {
     const updatedEntries = onCallList.value.map(entry => ({
       id: entry.id,
@@ -289,7 +289,6 @@ const saveSchedule = async () => {
       startTime: monthlySettings.value[selectedMonth.value].startTime, // Get the start time for the selected month
       timezone: monthlySettings.value[selectedMonth.value].timezone // Get the timezone for the selected month
     }));
-
     // Efficiently update or create entries based on ID
     await Promise.all(updatedEntries.map(async (entry) => {
       if (entry.id) {
@@ -304,17 +303,12 @@ const saveSchedule = async () => {
         });
       }
     }));
-
     alert('Schedule saved successfully!');
-    await fetchAndReloadSchedule(); // Refetch after saving
+    await fetchAndReloadSchedule(); // Refetch after saving d
   } catch (error) {
     console.error("Error saving schedule:", error);
     alert('An error occurred while saving the schedule.');
   }
 };
 </script>
-
 <style src="./OnCallApplication.css" scoped></style>
-
-     
-
