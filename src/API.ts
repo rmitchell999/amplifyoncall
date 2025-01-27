@@ -2,16 +2,22 @@
 /* eslint-disable */
 //  This file was automatically generated and should not be edited.
 
-export type CreateTodoInput = {
+export type CreateContactInput = {
   id?: string | null,
-  content: string,
+  email: string,
+  phone: string,
+  name: string,
+  onCall: boolean,
 };
 
-export type ModelTodoConditionInput = {
-  content?: ModelStringInput | null,
-  and?: Array< ModelTodoConditionInput | null > | null,
-  or?: Array< ModelTodoConditionInput | null > | null,
-  not?: ModelTodoConditionInput | null,
+export type ModelContactConditionInput = {
+  email?: ModelStringInput | null,
+  phone?: ModelStringInput | null,
+  name?: ModelStringInput | null,
+  onCall?: ModelBooleanInput | null,
+  and?: Array< ModelContactConditionInput | null > | null,
+  or?: Array< ModelContactConditionInput | null > | null,
+  not?: ModelContactConditionInput | null,
   createdAt?: ModelStringInput | null,
   updatedAt?: ModelStringInput | null,
 };
@@ -56,43 +62,6 @@ export type ModelSizeInput = {
   between?: Array< number | null > | null,
 };
 
-export type Todo = {
-  __typename: "Todo",
-  id: string,
-  content: string,
-  createdAt: string,
-  updatedAt: string,
-};
-
-export type UpdateTodoInput = {
-  id: string,
-  content?: string | null,
-};
-
-export type DeleteTodoInput = {
-  id: string,
-};
-
-export type CreateContactInput = {
-  id?: string | null,
-  email: string,
-  phone: string,
-  name: string,
-  onCall: boolean,
-};
-
-export type ModelContactConditionInput = {
-  email?: ModelStringInput | null,
-  phone?: ModelStringInput | null,
-  name?: ModelStringInput | null,
-  onCall?: ModelBooleanInput | null,
-  and?: Array< ModelContactConditionInput | null > | null,
-  or?: Array< ModelContactConditionInput | null > | null,
-  not?: ModelContactConditionInput | null,
-  createdAt?: ModelStringInput | null,
-  updatedAt?: ModelStringInput | null,
-};
-
 export type ModelBooleanInput = {
   ne?: boolean | null,
   eq?: boolean | null,
@@ -124,11 +93,12 @@ export type DeleteContactInput = {
 };
 
 export type CreateOnCallEntryInput = {
-  id?: string | null,
   groupName: string,
   day: string,
-  contactID: string,
+  contactID?: string | null,
   phone?: string | null,
+  startTime?: string | null,
+  timezone?: string | null,
 };
 
 export type ModelOnCallEntryConditionInput = {
@@ -136,6 +106,8 @@ export type ModelOnCallEntryConditionInput = {
   day?: ModelStringInput | null,
   contactID?: ModelIDInput | null,
   phone?: ModelStringInput | null,
+  timezone?: ModelStringInput | null,
+  startTime?: ModelStringInput | null,
   and?: Array< ModelOnCallEntryConditionInput | null > | null,
   or?: Array< ModelOnCallEntryConditionInput | null > | null,
   not?: ModelOnCallEntryConditionInput | null,
@@ -164,9 +136,11 @@ export type OnCallEntry = {
   id: string,
   groupName: string,
   day: string,
-  contactID: string,
+  contactID?: string | null,
   contact?: Contact | null,
   phone?: string | null,
+  timezone?: string | null,
+  startTime?: string | null,
   createdAt: string,
   updatedAt: string,
 };
@@ -177,26 +151,12 @@ export type UpdateOnCallEntryInput = {
   day?: string | null,
   contactID?: string | null,
   phone?: string | null,
+  startTime?: string | null,
+  timezone?: string | null,
 };
 
 export type DeleteOnCallEntryInput = {
   id: string,
-};
-
-export type ModelTodoFilterInput = {
-  id?: ModelIDInput | null,
-  content?: ModelStringInput | null,
-  createdAt?: ModelStringInput | null,
-  updatedAt?: ModelStringInput | null,
-  and?: Array< ModelTodoFilterInput | null > | null,
-  or?: Array< ModelTodoFilterInput | null > | null,
-  not?: ModelTodoFilterInput | null,
-};
-
-export type ModelTodoConnection = {
-  __typename: "ModelTodoConnection",
-  items:  Array<Todo | null >,
-  nextToken?: string | null,
 };
 
 export type ModelContactFilterInput = {
@@ -224,6 +184,8 @@ export type ModelOnCallEntryFilterInput = {
   day?: ModelStringInput | null,
   contactID?: ModelIDInput | null,
   phone?: ModelStringInput | null,
+  timezone?: ModelStringInput | null,
+  startTime?: ModelStringInput | null,
   createdAt?: ModelStringInput | null,
   updatedAt?: ModelStringInput | null,
   and?: Array< ModelOnCallEntryFilterInput | null > | null,
@@ -237,13 +199,16 @@ export type ModelOnCallEntryConnection = {
   nextToken?: string | null,
 };
 
-export type ModelSubscriptionTodoFilterInput = {
+export type ModelSubscriptionContactFilterInput = {
   id?: ModelSubscriptionIDInput | null,
-  content?: ModelSubscriptionStringInput | null,
+  email?: ModelSubscriptionStringInput | null,
+  phone?: ModelSubscriptionStringInput | null,
+  name?: ModelSubscriptionStringInput | null,
+  onCall?: ModelSubscriptionBooleanInput | null,
   createdAt?: ModelSubscriptionStringInput | null,
   updatedAt?: ModelSubscriptionStringInput | null,
-  and?: Array< ModelSubscriptionTodoFilterInput | null > | null,
-  or?: Array< ModelSubscriptionTodoFilterInput | null > | null,
+  and?: Array< ModelSubscriptionContactFilterInput | null > | null,
+  or?: Array< ModelSubscriptionContactFilterInput | null > | null,
 };
 
 export type ModelSubscriptionIDInput = {
@@ -276,18 +241,6 @@ export type ModelSubscriptionStringInput = {
   notIn?: Array< string | null > | null,
 };
 
-export type ModelSubscriptionContactFilterInput = {
-  id?: ModelSubscriptionIDInput | null,
-  email?: ModelSubscriptionStringInput | null,
-  phone?: ModelSubscriptionStringInput | null,
-  name?: ModelSubscriptionStringInput | null,
-  onCall?: ModelSubscriptionBooleanInput | null,
-  createdAt?: ModelSubscriptionStringInput | null,
-  updatedAt?: ModelSubscriptionStringInput | null,
-  and?: Array< ModelSubscriptionContactFilterInput | null > | null,
-  or?: Array< ModelSubscriptionContactFilterInput | null > | null,
-};
-
 export type ModelSubscriptionBooleanInput = {
   ne?: boolean | null,
   eq?: boolean | null,
@@ -299,55 +252,12 @@ export type ModelSubscriptionOnCallEntryFilterInput = {
   day?: ModelSubscriptionStringInput | null,
   contactID?: ModelSubscriptionIDInput | null,
   phone?: ModelSubscriptionStringInput | null,
+  timezone?: ModelSubscriptionStringInput | null,
+  startTime?: ModelSubscriptionStringInput | null,
   createdAt?: ModelSubscriptionStringInput | null,
   updatedAt?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionOnCallEntryFilterInput | null > | null,
   or?: Array< ModelSubscriptionOnCallEntryFilterInput | null > | null,
-};
-
-export type CreateTodoMutationVariables = {
-  input: CreateTodoInput,
-  condition?: ModelTodoConditionInput | null,
-};
-
-export type CreateTodoMutation = {
-  createTodo?:  {
-    __typename: "Todo",
-    id: string,
-    content: string,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type UpdateTodoMutationVariables = {
-  input: UpdateTodoInput,
-  condition?: ModelTodoConditionInput | null,
-};
-
-export type UpdateTodoMutation = {
-  updateTodo?:  {
-    __typename: "Todo",
-    id: string,
-    content: string,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type DeleteTodoMutationVariables = {
-  input: DeleteTodoInput,
-  condition?: ModelTodoConditionInput | null,
-};
-
-export type DeleteTodoMutation = {
-  deleteTodo?:  {
-    __typename: "Todo",
-    id: string,
-    content: string,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
 };
 
 export type CreateContactMutationVariables = {
@@ -415,7 +325,7 @@ export type CreateOnCallEntryMutation = {
     id: string,
     groupName: string,
     day: string,
-    contactID: string,
+    contactID?: string | null,
     contact?:  {
       __typename: "Contact",
       id: string,
@@ -427,6 +337,8 @@ export type CreateOnCallEntryMutation = {
       updatedAt: string,
     } | null,
     phone?: string | null,
+    timezone?: string | null,
+    startTime?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -443,7 +355,7 @@ export type UpdateOnCallEntryMutation = {
     id: string,
     groupName: string,
     day: string,
-    contactID: string,
+    contactID?: string | null,
     contact?:  {
       __typename: "Contact",
       id: string,
@@ -455,6 +367,8 @@ export type UpdateOnCallEntryMutation = {
       updatedAt: string,
     } | null,
     phone?: string | null,
+    timezone?: string | null,
+    startTime?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -471,7 +385,7 @@ export type DeleteOnCallEntryMutation = {
     id: string,
     groupName: string,
     day: string,
-    contactID: string,
+    contactID?: string | null,
     contact?:  {
       __typename: "Contact",
       id: string,
@@ -483,42 +397,10 @@ export type DeleteOnCallEntryMutation = {
       updatedAt: string,
     } | null,
     phone?: string | null,
+    timezone?: string | null,
+    startTime?: string | null,
     createdAt: string,
     updatedAt: string,
-  } | null,
-};
-
-export type GetTodoQueryVariables = {
-  id: string,
-};
-
-export type GetTodoQuery = {
-  getTodo?:  {
-    __typename: "Todo",
-    id: string,
-    content: string,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type ListTodosQueryVariables = {
-  filter?: ModelTodoFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ListTodosQuery = {
-  listTodos?:  {
-    __typename: "ModelTodoConnection",
-    items:  Array< {
-      __typename: "Todo",
-      id: string,
-      content: string,
-      createdAt: string,
-      updatedAt: string,
-    } | null >,
-    nextToken?: string | null,
   } | null,
 };
 
@@ -572,7 +454,7 @@ export type GetOnCallEntryQuery = {
     id: string,
     groupName: string,
     day: string,
-    contactID: string,
+    contactID?: string | null,
     contact?:  {
       __typename: "Contact",
       id: string,
@@ -584,6 +466,8 @@ export type GetOnCallEntryQuery = {
       updatedAt: string,
     } | null,
     phone?: string | null,
+    timezone?: string | null,
+    startTime?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -603,54 +487,14 @@ export type ListOnCallEntriesQuery = {
       id: string,
       groupName: string,
       day: string,
-      contactID: string,
+      contactID?: string | null,
       phone?: string | null,
+      timezone?: string | null,
+      startTime?: string | null,
       createdAt: string,
       updatedAt: string,
     } | null >,
     nextToken?: string | null,
-  } | null,
-};
-
-export type OnCreateTodoSubscriptionVariables = {
-  filter?: ModelSubscriptionTodoFilterInput | null,
-};
-
-export type OnCreateTodoSubscription = {
-  onCreateTodo?:  {
-    __typename: "Todo",
-    id: string,
-    content: string,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type OnUpdateTodoSubscriptionVariables = {
-  filter?: ModelSubscriptionTodoFilterInput | null,
-};
-
-export type OnUpdateTodoSubscription = {
-  onUpdateTodo?:  {
-    __typename: "Todo",
-    id: string,
-    content: string,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type OnDeleteTodoSubscriptionVariables = {
-  filter?: ModelSubscriptionTodoFilterInput | null,
-};
-
-export type OnDeleteTodoSubscription = {
-  onDeleteTodo?:  {
-    __typename: "Todo",
-    id: string,
-    content: string,
-    createdAt: string,
-    updatedAt: string,
   } | null,
 };
 
@@ -715,7 +559,7 @@ export type OnCreateOnCallEntrySubscription = {
     id: string,
     groupName: string,
     day: string,
-    contactID: string,
+    contactID?: string | null,
     contact?:  {
       __typename: "Contact",
       id: string,
@@ -727,6 +571,8 @@ export type OnCreateOnCallEntrySubscription = {
       updatedAt: string,
     } | null,
     phone?: string | null,
+    timezone?: string | null,
+    startTime?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -742,7 +588,7 @@ export type OnUpdateOnCallEntrySubscription = {
     id: string,
     groupName: string,
     day: string,
-    contactID: string,
+    contactID?: string | null,
     contact?:  {
       __typename: "Contact",
       id: string,
@@ -754,6 +600,8 @@ export type OnUpdateOnCallEntrySubscription = {
       updatedAt: string,
     } | null,
     phone?: string | null,
+    timezone?: string | null,
+    startTime?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -769,7 +617,7 @@ export type OnDeleteOnCallEntrySubscription = {
     id: string,
     groupName: string,
     day: string,
-    contactID: string,
+    contactID?: string | null,
     contact?:  {
       __typename: "Contact",
       id: string,
@@ -781,6 +629,8 @@ export type OnDeleteOnCallEntrySubscription = {
       updatedAt: string,
     } | null,
     phone?: string | null,
+    timezone?: string | null,
+    startTime?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,

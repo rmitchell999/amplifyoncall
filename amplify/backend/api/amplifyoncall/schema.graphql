@@ -1,9 +1,9 @@
-type Todo @model @auth(rules: [{ allow: groups, groups: ["TerneuzenAdmin"], operations: [create, read, update, delete] }, { allow: groups, groups: ["TerneuzenReadOnly"], operations: [read] }]) {
-  id: ID!
-  content: String!
-}
-
-type Contact @model @auth(rules: [{ allow: groups, groups: ["TerneuzenAdmin"], operations: [create, read, update, delete] }, { allow: groups, groups: ["TerneuzenReadOnly"], operations: [read] }]) {
+type Contact @model @auth(
+  rules: [
+    { allow: groups, groups: ["TerneuzenAdmin"], operations: [create, read, update, delete] },
+    { allow: groups, groups: ["TerneuzenReadOnly"], operations: [read] }
+  ]
+) {
   id: ID!
   email: String!
   phone: String!
@@ -11,11 +11,35 @@ type Contact @model @auth(rules: [{ allow: groups, groups: ["TerneuzenAdmin"], o
   onCall: Boolean!
 }
 
-type OnCallEntry @model @auth(rules: [{ allow: groups, groups: ["TerneuzenAdmin"], operations: [create, read, update, delete] }, { allow: groups, groups: ["TerneuzenReadOnly"], operations: [read] }]) {
+type OnCallEntry @model @auth(
+  rules: [
+    { allow: groups, groups: ["TerneuzenAdmin"], operations: [create, read, update, delete] },
+    { allow: groups, groups: ["TerneuzenReadOnly"], operations: [read] }
+  ]
+) {
   id: ID!
   groupName: String!
   day: String!
-  contactID: ID!
+  contactID: ID
   contact: Contact @hasOne(fields: ["contactID"])
   phone: String
+  timezone: String
+  startTime: String  # Add this line
+}
+input CreateOnCallEntryInput {
+  groupName: String!
+  day: String!
+  contactID: ID
+  phone: String
+  startTime: String
+  timezone: String
+}
+input UpdateOnCallEntryInput {
+  id: ID!
+  groupName: String
+  day: String
+  contactID: ID
+  phone: String
+  startTime: String
+  timezone: String
 }

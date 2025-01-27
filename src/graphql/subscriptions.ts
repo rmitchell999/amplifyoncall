@@ -8,45 +8,6 @@ type GeneratedSubscription<InputType, OutputType> = string & {
   __generatedSubscriptionOutput: OutputType;
 };
 
-export const onCreateTodo = /* GraphQL */ `subscription OnCreateTodo($filter: ModelSubscriptionTodoFilterInput) {
-  onCreateTodo(filter: $filter) {
-    id
-    content
-    createdAt
-    updatedAt
-    __typename
-  }
-}
-` as GeneratedSubscription<
-  APITypes.OnCreateTodoSubscriptionVariables,
-  APITypes.OnCreateTodoSubscription
->;
-export const onUpdateTodo = /* GraphQL */ `subscription OnUpdateTodo($filter: ModelSubscriptionTodoFilterInput) {
-  onUpdateTodo(filter: $filter) {
-    id
-    content
-    createdAt
-    updatedAt
-    __typename
-  }
-}
-` as GeneratedSubscription<
-  APITypes.OnUpdateTodoSubscriptionVariables,
-  APITypes.OnUpdateTodoSubscription
->;
-export const onDeleteTodo = /* GraphQL */ `subscription OnDeleteTodo($filter: ModelSubscriptionTodoFilterInput) {
-  onDeleteTodo(filter: $filter) {
-    id
-    content
-    createdAt
-    updatedAt
-    __typename
-  }
-}
-` as GeneratedSubscription<
-  APITypes.OnDeleteTodoSubscriptionVariables,
-  APITypes.OnDeleteTodoSubscription
->;
 export const onCreateContact = /* GraphQL */ `subscription OnCreateContact($filter: ModelSubscriptionContactFilterInput) {
   onCreateContact(filter: $filter) {
     id
@@ -114,6 +75,8 @@ export const onCreateOnCallEntry = /* GraphQL */ `subscription OnCreateOnCallEnt
       __typename
     }
     phone
+    timezone
+    startTime
     createdAt
     updatedAt
     __typename
@@ -142,6 +105,8 @@ export const onUpdateOnCallEntry = /* GraphQL */ `subscription OnUpdateOnCallEnt
       __typename
     }
     phone
+    timezone
+    startTime
     createdAt
     updatedAt
     __typename
@@ -170,6 +135,8 @@ export const onDeleteOnCallEntry = /* GraphQL */ `subscription OnDeleteOnCallEnt
       __typename
     }
     phone
+    timezone
+    startTime
     createdAt
     updatedAt
     __typename

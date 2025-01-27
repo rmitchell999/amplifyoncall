@@ -8,34 +8,6 @@ type GeneratedQuery<InputType, OutputType> = string & {
   __generatedQueryOutput: OutputType;
 };
 
-export const getTodo = /* GraphQL */ `query GetTodo($id: ID!) {
-  getTodo(id: $id) {
-    id
-    content
-    createdAt
-    updatedAt
-    __typename
-  }
-}
-` as GeneratedQuery<APITypes.GetTodoQueryVariables, APITypes.GetTodoQuery>;
-export const listTodos = /* GraphQL */ `query ListTodos(
-  $filter: ModelTodoFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listTodos(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
-      id
-      content
-      createdAt
-      updatedAt
-      __typename
-    }
-    nextToken
-    __typename
-  }
-}
-` as GeneratedQuery<APITypes.ListTodosQueryVariables, APITypes.ListTodosQuery>;
 export const getContact = /* GraphQL */ `query GetContact($id: ID!) {
   getContact(id: $id) {
     id
@@ -93,6 +65,8 @@ export const getOnCallEntry = /* GraphQL */ `query GetOnCallEntry($id: ID!) {
       __typename
     }
     phone
+    timezone
+    startTime
     createdAt
     updatedAt
     __typename
@@ -114,6 +88,8 @@ export const listOnCallEntries = /* GraphQL */ `query ListOnCallEntries(
       day
       contactID
       phone
+      timezone
+      startTime
       createdAt
       updatedAt
       __typename
