@@ -8,58 +8,112 @@ type GeneratedSubscription<InputType, OutputType> = string & {
   __generatedSubscriptionOutput: OutputType;
 };
 
-export const onCreateContact = /* GraphQL */ `subscription OnCreateContact($filter: ModelSubscriptionContactFilterInput) {
-  onCreateContact(filter: $filter) {
-    id
-    email
-    phone
-    name
-    onCall
-    createdAt
-    updatedAt
-    __typename
-  }
-}
-` as GeneratedSubscription<
-  APITypes.OnCreateContactSubscriptionVariables,
-  APITypes.OnCreateContactSubscription
->;
-export const onUpdateContact = /* GraphQL */ `subscription OnUpdateContact($filter: ModelSubscriptionContactFilterInput) {
-  onUpdateContact(filter: $filter) {
-    id
-    email
-    phone
-    name
-    onCall
-    createdAt
-    updatedAt
-    __typename
-  }
-}
-` as GeneratedSubscription<
-  APITypes.OnUpdateContactSubscriptionVariables,
-  APITypes.OnUpdateContactSubscription
->;
-export const onDeleteContact = /* GraphQL */ `subscription OnDeleteContact($filter: ModelSubscriptionContactFilterInput) {
-  onDeleteContact(filter: $filter) {
-    id
-    email
-    phone
-    name
-    onCall
-    createdAt
-    updatedAt
-    __typename
-  }
-}
-` as GeneratedSubscription<
-  APITypes.OnDeleteContactSubscriptionVariables,
-  APITypes.OnDeleteContactSubscription
->;
-export const onCreateOnCallEntry = /* GraphQL */ `subscription OnCreateOnCallEntry(
-  $filter: ModelSubscriptionOnCallEntryFilterInput
+export const onCreateTerneuzenContact = /* GraphQL */ `subscription OnCreateTerneuzenContact(
+  $filter: ModelSubscriptionTerneuzenContactFilterInput
 ) {
-  onCreateOnCallEntry(filter: $filter) {
+  onCreateTerneuzenContact(filter: $filter) {
+    id
+    email
+    phone
+    name
+    onCall
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnCreateTerneuzenContactSubscriptionVariables,
+  APITypes.OnCreateTerneuzenContactSubscription
+>;
+export const onUpdateTerneuzenContact = /* GraphQL */ `subscription OnUpdateTerneuzenContact(
+  $filter: ModelSubscriptionTerneuzenContactFilterInput
+) {
+  onUpdateTerneuzenContact(filter: $filter) {
+    id
+    email
+    phone
+    name
+    onCall
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnUpdateTerneuzenContactSubscriptionVariables,
+  APITypes.OnUpdateTerneuzenContactSubscription
+>;
+export const onDeleteTerneuzenContact = /* GraphQL */ `subscription OnDeleteTerneuzenContact(
+  $filter: ModelSubscriptionTerneuzenContactFilterInput
+) {
+  onDeleteTerneuzenContact(filter: $filter) {
+    id
+    email
+    phone
+    name
+    onCall
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnDeleteTerneuzenContactSubscriptionVariables,
+  APITypes.OnDeleteTerneuzenContactSubscription
+>;
+export const onCreateITContact = /* GraphQL */ `subscription OnCreateITContact($filter: ModelSubscriptionITContactFilterInput) {
+  onCreateITContact(filter: $filter) {
+    id
+    email
+    phone
+    name
+    onCall
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnCreateITContactSubscriptionVariables,
+  APITypes.OnCreateITContactSubscription
+>;
+export const onUpdateITContact = /* GraphQL */ `subscription OnUpdateITContact($filter: ModelSubscriptionITContactFilterInput) {
+  onUpdateITContact(filter: $filter) {
+    id
+    email
+    phone
+    name
+    onCall
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnUpdateITContactSubscriptionVariables,
+  APITypes.OnUpdateITContactSubscription
+>;
+export const onDeleteITContact = /* GraphQL */ `subscription OnDeleteITContact($filter: ModelSubscriptionITContactFilterInput) {
+  onDeleteITContact(filter: $filter) {
+    id
+    email
+    phone
+    name
+    onCall
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnDeleteITContactSubscriptionVariables,
+  APITypes.OnDeleteITContactSubscription
+>;
+export const onCreateTerneuzenOnCallEntry = /* GraphQL */ `subscription OnCreateTerneuzenOnCallEntry(
+  $filter: ModelSubscriptionTerneuzenOnCallEntryFilterInput
+) {
+  onCreateTerneuzenOnCallEntry(filter: $filter) {
     id
     groupName
     day
@@ -83,13 +137,13 @@ export const onCreateOnCallEntry = /* GraphQL */ `subscription OnCreateOnCallEnt
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnCreateOnCallEntrySubscriptionVariables,
-  APITypes.OnCreateOnCallEntrySubscription
+  APITypes.OnCreateTerneuzenOnCallEntrySubscriptionVariables,
+  APITypes.OnCreateTerneuzenOnCallEntrySubscription
 >;
-export const onUpdateOnCallEntry = /* GraphQL */ `subscription OnUpdateOnCallEntry(
-  $filter: ModelSubscriptionOnCallEntryFilterInput
+export const onUpdateTerneuzenOnCallEntry = /* GraphQL */ `subscription OnUpdateTerneuzenOnCallEntry(
+  $filter: ModelSubscriptionTerneuzenOnCallEntryFilterInput
 ) {
-  onUpdateOnCallEntry(filter: $filter) {
+  onUpdateTerneuzenOnCallEntry(filter: $filter) {
     id
     groupName
     day
@@ -113,13 +167,13 @@ export const onUpdateOnCallEntry = /* GraphQL */ `subscription OnUpdateOnCallEnt
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnUpdateOnCallEntrySubscriptionVariables,
-  APITypes.OnUpdateOnCallEntrySubscription
+  APITypes.OnUpdateTerneuzenOnCallEntrySubscriptionVariables,
+  APITypes.OnUpdateTerneuzenOnCallEntrySubscription
 >;
-export const onDeleteOnCallEntry = /* GraphQL */ `subscription OnDeleteOnCallEntry(
-  $filter: ModelSubscriptionOnCallEntryFilterInput
+export const onDeleteTerneuzenOnCallEntry = /* GraphQL */ `subscription OnDeleteTerneuzenOnCallEntry(
+  $filter: ModelSubscriptionTerneuzenOnCallEntryFilterInput
 ) {
-  onDeleteOnCallEntry(filter: $filter) {
+  onDeleteTerneuzenOnCallEntry(filter: $filter) {
     id
     groupName
     day
@@ -143,6 +197,96 @@ export const onDeleteOnCallEntry = /* GraphQL */ `subscription OnDeleteOnCallEnt
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnDeleteOnCallEntrySubscriptionVariables,
-  APITypes.OnDeleteOnCallEntrySubscription
+  APITypes.OnDeleteTerneuzenOnCallEntrySubscriptionVariables,
+  APITypes.OnDeleteTerneuzenOnCallEntrySubscription
+>;
+export const onCreateITOnCallEntry = /* GraphQL */ `subscription OnCreateITOnCallEntry(
+  $filter: ModelSubscriptionITOnCallEntryFilterInput
+) {
+  onCreateITOnCallEntry(filter: $filter) {
+    id
+    groupName
+    day
+    contactID
+    contact {
+      id
+      email
+      phone
+      name
+      onCall
+      createdAt
+      updatedAt
+      __typename
+    }
+    phone
+    timezone
+    startTime
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnCreateITOnCallEntrySubscriptionVariables,
+  APITypes.OnCreateITOnCallEntrySubscription
+>;
+export const onUpdateITOnCallEntry = /* GraphQL */ `subscription OnUpdateITOnCallEntry(
+  $filter: ModelSubscriptionITOnCallEntryFilterInput
+) {
+  onUpdateITOnCallEntry(filter: $filter) {
+    id
+    groupName
+    day
+    contactID
+    contact {
+      id
+      email
+      phone
+      name
+      onCall
+      createdAt
+      updatedAt
+      __typename
+    }
+    phone
+    timezone
+    startTime
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnUpdateITOnCallEntrySubscriptionVariables,
+  APITypes.OnUpdateITOnCallEntrySubscription
+>;
+export const onDeleteITOnCallEntry = /* GraphQL */ `subscription OnDeleteITOnCallEntry(
+  $filter: ModelSubscriptionITOnCallEntryFilterInput
+) {
+  onDeleteITOnCallEntry(filter: $filter) {
+    id
+    groupName
+    day
+    contactID
+    contact {
+      id
+      email
+      phone
+      name
+      onCall
+      createdAt
+      updatedAt
+      __typename
+    }
+    phone
+    timezone
+    startTime
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnDeleteITOnCallEntrySubscriptionVariables,
+  APITypes.OnDeleteITOnCallEntrySubscription
 >;

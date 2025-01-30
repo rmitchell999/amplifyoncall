@@ -8,11 +8,11 @@ type GeneratedMutation<InputType, OutputType> = string & {
   __generatedMutationOutput: OutputType;
 };
 
-export const createContact = /* GraphQL */ `mutation CreateContact(
-  $input: CreateContactInput!
-  $condition: ModelContactConditionInput
+export const createTerneuzenContact = /* GraphQL */ `mutation CreateTerneuzenContact(
+  $input: CreateTerneuzenContactInput!
+  $condition: ModelTerneuzenContactConditionInput
 ) {
-  createContact(input: $input, condition: $condition) {
+  createTerneuzenContact(input: $input, condition: $condition) {
     id
     email
     phone
@@ -24,14 +24,14 @@ export const createContact = /* GraphQL */ `mutation CreateContact(
   }
 }
 ` as GeneratedMutation<
-  APITypes.CreateContactMutationVariables,
-  APITypes.CreateContactMutation
+  APITypes.CreateTerneuzenContactMutationVariables,
+  APITypes.CreateTerneuzenContactMutation
 >;
-export const updateContact = /* GraphQL */ `mutation UpdateContact(
-  $input: UpdateContactInput!
-  $condition: ModelContactConditionInput
+export const updateTerneuzenContact = /* GraphQL */ `mutation UpdateTerneuzenContact(
+  $input: UpdateTerneuzenContactInput!
+  $condition: ModelTerneuzenContactConditionInput
 ) {
-  updateContact(input: $input, condition: $condition) {
+  updateTerneuzenContact(input: $input, condition: $condition) {
     id
     email
     phone
@@ -43,14 +43,14 @@ export const updateContact = /* GraphQL */ `mutation UpdateContact(
   }
 }
 ` as GeneratedMutation<
-  APITypes.UpdateContactMutationVariables,
-  APITypes.UpdateContactMutation
+  APITypes.UpdateTerneuzenContactMutationVariables,
+  APITypes.UpdateTerneuzenContactMutation
 >;
-export const deleteContact = /* GraphQL */ `mutation DeleteContact(
-  $input: DeleteContactInput!
-  $condition: ModelContactConditionInput
+export const deleteTerneuzenContact = /* GraphQL */ `mutation DeleteTerneuzenContact(
+  $input: DeleteTerneuzenContactInput!
+  $condition: ModelTerneuzenContactConditionInput
 ) {
-  deleteContact(input: $input, condition: $condition) {
+  deleteTerneuzenContact(input: $input, condition: $condition) {
     id
     email
     phone
@@ -62,14 +62,71 @@ export const deleteContact = /* GraphQL */ `mutation DeleteContact(
   }
 }
 ` as GeneratedMutation<
-  APITypes.DeleteContactMutationVariables,
-  APITypes.DeleteContactMutation
+  APITypes.DeleteTerneuzenContactMutationVariables,
+  APITypes.DeleteTerneuzenContactMutation
 >;
-export const createOnCallEntry = /* GraphQL */ `mutation CreateOnCallEntry(
-  $input: CreateOnCallEntryInput!
-  $condition: ModelOnCallEntryConditionInput
+export const createITContact = /* GraphQL */ `mutation CreateITContact(
+  $input: CreateITContactInput!
+  $condition: ModelITContactConditionInput
 ) {
-  createOnCallEntry(input: $input, condition: $condition) {
+  createITContact(input: $input, condition: $condition) {
+    id
+    email
+    phone
+    name
+    onCall
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.CreateITContactMutationVariables,
+  APITypes.CreateITContactMutation
+>;
+export const updateITContact = /* GraphQL */ `mutation UpdateITContact(
+  $input: UpdateITContactInput!
+  $condition: ModelITContactConditionInput
+) {
+  updateITContact(input: $input, condition: $condition) {
+    id
+    email
+    phone
+    name
+    onCall
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.UpdateITContactMutationVariables,
+  APITypes.UpdateITContactMutation
+>;
+export const deleteITContact = /* GraphQL */ `mutation DeleteITContact(
+  $input: DeleteITContactInput!
+  $condition: ModelITContactConditionInput
+) {
+  deleteITContact(input: $input, condition: $condition) {
+    id
+    email
+    phone
+    name
+    onCall
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.DeleteITContactMutationVariables,
+  APITypes.DeleteITContactMutation
+>;
+export const createTerneuzenOnCallEntry = /* GraphQL */ `mutation CreateTerneuzenOnCallEntry(
+  $input: CreateTerneuzenOnCallEntryInput!
+  $condition: ModelTerneuzenOnCallEntryConditionInput
+) {
+  createTerneuzenOnCallEntry(input: $input, condition: $condition) {
     id
     groupName
     day
@@ -93,14 +150,14 @@ export const createOnCallEntry = /* GraphQL */ `mutation CreateOnCallEntry(
   }
 }
 ` as GeneratedMutation<
-  APITypes.CreateOnCallEntryMutationVariables,
-  APITypes.CreateOnCallEntryMutation
+  APITypes.CreateTerneuzenOnCallEntryMutationVariables,
+  APITypes.CreateTerneuzenOnCallEntryMutation
 >;
-export const updateOnCallEntry = /* GraphQL */ `mutation UpdateOnCallEntry(
-  $input: UpdateOnCallEntryInput!
-  $condition: ModelOnCallEntryConditionInput
+export const updateTerneuzenOnCallEntry = /* GraphQL */ `mutation UpdateTerneuzenOnCallEntry(
+  $input: UpdateTerneuzenOnCallEntryInput!
+  $condition: ModelTerneuzenOnCallEntryConditionInput
 ) {
-  updateOnCallEntry(input: $input, condition: $condition) {
+  updateTerneuzenOnCallEntry(input: $input, condition: $condition) {
     id
     groupName
     day
@@ -124,14 +181,14 @@ export const updateOnCallEntry = /* GraphQL */ `mutation UpdateOnCallEntry(
   }
 }
 ` as GeneratedMutation<
-  APITypes.UpdateOnCallEntryMutationVariables,
-  APITypes.UpdateOnCallEntryMutation
+  APITypes.UpdateTerneuzenOnCallEntryMutationVariables,
+  APITypes.UpdateTerneuzenOnCallEntryMutation
 >;
-export const deleteOnCallEntry = /* GraphQL */ `mutation DeleteOnCallEntry(
-  $input: DeleteOnCallEntryInput!
-  $condition: ModelOnCallEntryConditionInput
+export const deleteTerneuzenOnCallEntry = /* GraphQL */ `mutation DeleteTerneuzenOnCallEntry(
+  $input: DeleteTerneuzenOnCallEntryInput!
+  $condition: ModelTerneuzenOnCallEntryConditionInput
 ) {
-  deleteOnCallEntry(input: $input, condition: $condition) {
+  deleteTerneuzenOnCallEntry(input: $input, condition: $condition) {
     id
     groupName
     day
@@ -155,6 +212,99 @@ export const deleteOnCallEntry = /* GraphQL */ `mutation DeleteOnCallEntry(
   }
 }
 ` as GeneratedMutation<
-  APITypes.DeleteOnCallEntryMutationVariables,
-  APITypes.DeleteOnCallEntryMutation
+  APITypes.DeleteTerneuzenOnCallEntryMutationVariables,
+  APITypes.DeleteTerneuzenOnCallEntryMutation
+>;
+export const createITOnCallEntry = /* GraphQL */ `mutation CreateITOnCallEntry(
+  $input: CreateITOnCallEntryInput!
+  $condition: ModelITOnCallEntryConditionInput
+) {
+  createITOnCallEntry(input: $input, condition: $condition) {
+    id
+    groupName
+    day
+    contactID
+    contact {
+      id
+      email
+      phone
+      name
+      onCall
+      createdAt
+      updatedAt
+      __typename
+    }
+    phone
+    timezone
+    startTime
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.CreateITOnCallEntryMutationVariables,
+  APITypes.CreateITOnCallEntryMutation
+>;
+export const updateITOnCallEntry = /* GraphQL */ `mutation UpdateITOnCallEntry(
+  $input: UpdateITOnCallEntryInput!
+  $condition: ModelITOnCallEntryConditionInput
+) {
+  updateITOnCallEntry(input: $input, condition: $condition) {
+    id
+    groupName
+    day
+    contactID
+    contact {
+      id
+      email
+      phone
+      name
+      onCall
+      createdAt
+      updatedAt
+      __typename
+    }
+    phone
+    timezone
+    startTime
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.UpdateITOnCallEntryMutationVariables,
+  APITypes.UpdateITOnCallEntryMutation
+>;
+export const deleteITOnCallEntry = /* GraphQL */ `mutation DeleteITOnCallEntry(
+  $input: DeleteITOnCallEntryInput!
+  $condition: ModelITOnCallEntryConditionInput
+) {
+  deleteITOnCallEntry(input: $input, condition: $condition) {
+    id
+    groupName
+    day
+    contactID
+    contact {
+      id
+      email
+      phone
+      name
+      onCall
+      createdAt
+      updatedAt
+      __typename
+    }
+    phone
+    timezone
+    startTime
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.DeleteITOnCallEntryMutationVariables,
+  APITypes.DeleteITOnCallEntryMutation
 >;

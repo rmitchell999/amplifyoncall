@@ -42,7 +42,10 @@
     ],
     "userPoolGroupList": [
       "TerneuzenAdmin",
-      "TerneuzenReadOnly"
+      "TerneuzenReadOnly",
+      "ITAdmin",
+      "ITReadOnly",
+      "GlobalAdmin"
     ],
     "serviceName": "Cognito",
     "usernameCaseSensitive": false,

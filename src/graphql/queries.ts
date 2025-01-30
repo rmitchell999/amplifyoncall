@@ -8,8 +8,8 @@ type GeneratedQuery<InputType, OutputType> = string & {
   __generatedQueryOutput: OutputType;
 };
 
-export const getContact = /* GraphQL */ `query GetContact($id: ID!) {
-  getContact(id: $id) {
+export const getTerneuzenContact = /* GraphQL */ `query GetTerneuzenContact($id: ID!) {
+  getTerneuzenContact(id: $id) {
     id
     email
     phone
@@ -21,15 +21,15 @@ export const getContact = /* GraphQL */ `query GetContact($id: ID!) {
   }
 }
 ` as GeneratedQuery<
-  APITypes.GetContactQueryVariables,
-  APITypes.GetContactQuery
+  APITypes.GetTerneuzenContactQueryVariables,
+  APITypes.GetTerneuzenContactQuery
 >;
-export const listContacts = /* GraphQL */ `query ListContacts(
-  $filter: ModelContactFilterInput
+export const listTerneuzenContacts = /* GraphQL */ `query ListTerneuzenContacts(
+  $filter: ModelTerneuzenContactFilterInput
   $limit: Int
   $nextToken: String
 ) {
-  listContacts(filter: $filter, limit: $limit, nextToken: $nextToken) {
+  listTerneuzenContacts(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
       email
@@ -45,11 +45,51 @@ export const listContacts = /* GraphQL */ `query ListContacts(
   }
 }
 ` as GeneratedQuery<
-  APITypes.ListContactsQueryVariables,
-  APITypes.ListContactsQuery
+  APITypes.ListTerneuzenContactsQueryVariables,
+  APITypes.ListTerneuzenContactsQuery
 >;
-export const getOnCallEntry = /* GraphQL */ `query GetOnCallEntry($id: ID!) {
-  getOnCallEntry(id: $id) {
+export const getITContact = /* GraphQL */ `query GetITContact($id: ID!) {
+  getITContact(id: $id) {
+    id
+    email
+    phone
+    name
+    onCall
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.GetITContactQueryVariables,
+  APITypes.GetITContactQuery
+>;
+export const listITContacts = /* GraphQL */ `query ListITContacts(
+  $filter: ModelITContactFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listITContacts(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      email
+      phone
+      name
+      onCall
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListITContactsQueryVariables,
+  APITypes.ListITContactsQuery
+>;
+export const getTerneuzenOnCallEntry = /* GraphQL */ `query GetTerneuzenOnCallEntry($id: ID!) {
+  getTerneuzenOnCallEntry(id: $id) {
     id
     groupName
     day
@@ -73,15 +113,19 @@ export const getOnCallEntry = /* GraphQL */ `query GetOnCallEntry($id: ID!) {
   }
 }
 ` as GeneratedQuery<
-  APITypes.GetOnCallEntryQueryVariables,
-  APITypes.GetOnCallEntryQuery
+  APITypes.GetTerneuzenOnCallEntryQueryVariables,
+  APITypes.GetTerneuzenOnCallEntryQuery
 >;
-export const listOnCallEntries = /* GraphQL */ `query ListOnCallEntries(
-  $filter: ModelOnCallEntryFilterInput
+export const listTerneuzenOnCallEntries = /* GraphQL */ `query ListTerneuzenOnCallEntries(
+  $filter: ModelTerneuzenOnCallEntryFilterInput
   $limit: Int
   $nextToken: String
 ) {
-  listOnCallEntries(filter: $filter, limit: $limit, nextToken: $nextToken) {
+  listTerneuzenOnCallEntries(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
     items {
       id
       groupName
@@ -99,6 +143,60 @@ export const listOnCallEntries = /* GraphQL */ `query ListOnCallEntries(
   }
 }
 ` as GeneratedQuery<
-  APITypes.ListOnCallEntriesQueryVariables,
-  APITypes.ListOnCallEntriesQuery
+  APITypes.ListTerneuzenOnCallEntriesQueryVariables,
+  APITypes.ListTerneuzenOnCallEntriesQuery
+>;
+export const getITOnCallEntry = /* GraphQL */ `query GetITOnCallEntry($id: ID!) {
+  getITOnCallEntry(id: $id) {
+    id
+    groupName
+    day
+    contactID
+    contact {
+      id
+      email
+      phone
+      name
+      onCall
+      createdAt
+      updatedAt
+      __typename
+    }
+    phone
+    timezone
+    startTime
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.GetITOnCallEntryQueryVariables,
+  APITypes.GetITOnCallEntryQuery
+>;
+export const listITOnCallEntries = /* GraphQL */ `query ListITOnCallEntries(
+  $filter: ModelITOnCallEntryFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listITOnCallEntries(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      groupName
+      day
+      contactID
+      phone
+      timezone
+      startTime
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListITOnCallEntriesQueryVariables,
+  APITypes.ListITOnCallEntriesQuery
 >;

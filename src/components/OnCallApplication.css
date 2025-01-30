@@ -1,26 +1,26 @@
 .on-call-application {
-  padding: 20px;
+  padding: 100px;
   font-family: 'Open Sans', sans-serif;
-  background-color: #fff;
+  background-color: #fff; /* Keep white for the app background */
   color: #333;
-  min-height: 100vh;
+  min-height: 50vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  padding-top: 40px;
+  padding-top: 20px;
 }
 
 .header {
   display: flex;
   justify-content: flex-end;
   width: 100%;
-  padding: 10px;
-  background-color: #fff;
+  padding: 5px;
+  background-color: #fff; /* Keep white */
 }
 
 .logout-button {
-  background-color: #dc3545;
+  background-color: #dc3545; /* Keep red for logout */
   color: white;
   border: none;
   padding: 10px 20px;
@@ -30,11 +30,11 @@
 }
 
 .logout-button:hover {
-  background-color: #c82333;
+  background-color: #c82333; /* Darker red on hover */
 }
 
 .tabs {
-  margin-bottom: 20px;
+  margin-bottom: 25px;
   display: flex;
   justify-content: center;
   width: 100%;
@@ -42,9 +42,9 @@
 
 .tabs button {
   margin: 0 20px;
-  padding: 15px 20px;
+  padding: 10px 20px; /* Fixed padding */
   border: none;
-  background-color: #007bff;
+  background-color: #4dc1d2; /* Teal */
   color: #fff;
   border-radius: 5px;
   cursor: pointer;
@@ -52,11 +52,11 @@
 }
 
 .tabs button.active {
-  background-color: #0056b3;
+  background-color: #3ab0b3; /* Darker teal for active tab */
 }
 
 .tabs button:hover {
-  background-color: #0056b3;
+  background-color: #3ab0b3; /* Darker teal on hover */
 }
 
 .schedule-options {
@@ -64,7 +64,7 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  margin: 20px 0;
+  margin: 30px 0;
 }
 
 .option-group {
@@ -77,7 +77,7 @@
 }
 
 select {
-  padding: 8px 12px;
+  padding: 8px 10px;
   border-radius: 5px;
   border: 1px solid #ccc;
   background-color: #fff;
@@ -90,11 +90,56 @@ button {
 }
 
 button:hover {
-  background-color: #e9ecef;
+  background-color: #e9ecef; /* Slightly lighter background on hover */
 }
 
 .action-buttons {
-  margin-top: 20px;
+  margin-top: 12px;
+  display: flex;
+  justify-content: flex-start; /* Align items to the left */
+  width: 100%;
+  margin-bottom: 20px; /* Add bottom margin for separation */
+}
+
+.action-buttons button {
+  margin-right: 20px; /* Add right margin for separation */
+  padding: 10px 20px; /* Adjust padding as needed */
+  border: none;
+  background-color: #4dc1d2; /* Teal background for action buttons */
+  color: #fff; /* White text */
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse; /* Ensure borders are collapsed */
+}
+
+.table th,
+.table td {
+  padding: 12px; /* Add padding for better spacing */
+  text-align: left; /* Align text properly */
+}
+
+.table th {
+  background-color: #4dc1d2; /* Teal background for headers */
+  color: #fff; /* White text */
+}
+
+.table td {
+  border-top: 1px solid #ddd; /* Add top border for separation */
+}
+
+.status-on-call {
+  color: green; /* Color for "On Call" status */
+  font-weight: bold;
+}
+
+.status-free {
+  color: red; /* Color for "Free" status */
+  font-weight: bold;
 }
 
 .calendar-grid {
@@ -108,9 +153,9 @@ button:hover {
 
 .calendar-day {
   padding: 10px;
-  background-color: #e9ecef;
+  background-color: #e9ecef; /* Light grey for calendar days */
   border: 1px solid #ddd;
-  border-radius: 8px;
+  border-radius: 10px;
   text-align: center;
   min-height: 80px;
   position: relative;
@@ -123,12 +168,12 @@ button:hover {
 }
 
 .calendar-day.contact-assigned {
-  background-color: #007bff; /* Blue background for assigned contact */
+  background-color: #4dc1d2; /* Teal background for assigned contact */
   color: #fff; /* White text for assigned contact */
 }
 
 .calendar-day.selected {
-  background-color: #0056b3; /* Darker blue for selected day */
+  background-color: #3ab0b3; /* Darker teal for selected day */
   color: #fff; /* White text for selected day */
 }
 
@@ -183,20 +228,17 @@ button:hover {
 .modal-content button {
   padding: 10px;
   color: white;
-  background-color: #007bff;
+  background-color: #4dc1d2; /* Teal background for modal button */
   border: none;
   border-radius: 4px;
   margin-top: 10px;
 }
 
 .modal-content button[type="button"] {
-  background-color: #6c757d; /* Gray background for the cancel button */
+  background-color: #5A6770; /* Gray background for the cancel button */
 }
 
 .modal-content .close-button {
-  position: absolute;
-  top: 10px;
-  right: 10px;
   background: none;
   border: none;
   font-size: 16px;
@@ -206,5 +248,16 @@ button:hover {
 
 .modal-content .close-button:hover {
   color: #000; /* Darker color on hover */
+}
+
+/* Additional styling for status indicators */
+.status-on-call {
+  color: rgb(250, 0, 0); /* Color for "On Call" status */
+  font-weight: bold;
+}
+
+.status-free {
+  color: rgb(7, 206, 0); /* Color for "Free" status */
+  font-weight: bold;
 }
 

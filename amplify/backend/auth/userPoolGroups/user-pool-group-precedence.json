@@ -19,20 +19,8 @@
                 "dynamodb:Query"
               ],
               "Resource": [
-                "arn:aws:dynamodb:us-west-1:650251713968:table/AmplifyDataStore-fedvz7rozbhozk37fmmqs4fytj-dev",
-                "arn:aws:dynamodb:us-west-1:650251713968:table/Contact-fedvz7rozbhozk37fmmqs4fytj-dev",
-                "arn:aws:dynamodb:us-west-1:650251713968:table/OnCallSchedule-fedvz7rozbhozk37fmmqs4fytj-dev",
-                "arn:aws:dynamodb:us-west-1:650251713968:table/OnCallScheduleContact-fedvz7rozbhozk37fmmqs4fytj-dev"
-              ]
-            },
-            {
-              "Sid": "statement2",
-              "Effect": "Allow",
-              "Action": [
-                "s3:CreateBucket"
-              ],
-              "Resource": [
-                "arn:aws:s3:::*"
+                "arn:aws:dynamodb:us-west-1:650251713968:table/TerneuzenContact-trakvr5jn5evxhn7vj27wuetaq-dev",
+                "arn:aws:dynamodb:us-west-1:650251713968:table/TerneuzenOnCallEntry-trakvr5jn5evxhn7vj27wuetaq-dev"
               ]
             }
           ]
@@ -57,10 +45,94 @@
                 "dynamodb:Query"
               ],
               "Resource": [
-                "arn:aws:dynamodb:us-west-1:650251713968:table/AmplifyDataStore-fedvz7rozbhozk37fmmqs4fytj-dev",
-                "arn:aws:dynamodb:us-west-1:650251713968:table/Contact-fedvz7rozbhozk37fmmqs4fytj-dev",
-                "arn:aws:dynamodb:us-west-1:650251713968:table/OnCallSchedule-fedvz7rozbhozk37fmmqs4fytj-dev",
-                "arn:aws:dynamodb:us-west-1:650251713968:table/OnCallScheduleContact-fedvz7rozbhozk37fmmqs4fytj-dev"
+                "arn:aws:dynamodb:us-west-1:650251713968:table/TerneuzenContact-trakvr5jn5evxhn7vj27wuetaq-dev",
+                "arn:aws:dynamodb:us-west-1:650251713968:table/TerneuzenOnCallEntry-trakvr5jn5evxhn7vj27wuetaq-dev"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "groupName": "ITAdmin",
+    "precedence": 3,
+    "customPolicies": [
+      {
+        "PolicyName": "it-admin-policy",
+        "PolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Sid": "statement1",
+              "Effect": "Allow",
+              "Action": [
+                "dynamodb:PutItem",
+                "dynamodb:UpdateItem",
+                "dynamodb:DeleteItem",
+                "dynamodb:GetItem",
+                "dynamodb:Query"
+              ],
+              "Resource": [
+                "arn:aws:dynamodb:us-west-1:650251713968:table/ITContact-trakvr5jn5evxhn7vj27wuetaq-dev",
+                "arn:aws:dynamodb:us-west-1:650251713968:table/ITOnCallEntry-trakvr5jn5evxhn7vj27wuetaq-dev"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "groupName": "ITReadOnly",
+    "precedence": 4,
+    "customPolicies": [
+      {
+        "PolicyName": "it-readonly-policy",
+        "PolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Sid": "statement1",
+              "Effect": "Allow",
+              "Action": [
+                "dynamodb:GetItem",
+                "dynamodb:Query"
+              ],
+              "Resource": [
+                "arn:aws:dynamodb:us-west-1:650251713968:table/ITContact-trakvr5jn5evxhn7vj27wuetaq-dev",
+                "arn:aws:dynamodb:us-west-1:650251713968:table/ITOnCallEntry-trakvr5jn5evxhn7vj27wuetaq-dev"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "groupName": "GlobalAdmin",
+    "precedence": 5,
+    "customPolicies": [
+      {
+        "PolicyName": "global-admin-policy",
+        "PolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Sid": "statement1",
+              "Effect": "Allow",
+              "Action": [
+                "dynamodb:PutItem",
+                "dynamodb:UpdateItem",
+                "dynamodb:DeleteItem",
+                "dynamodb:GetItem",
+                "dynamodb:Query"
+              ],
+              "Resource": [
+                "arn:aws:dynamodb:us-west-1:650251713968:table/TerneuzenContact-trakvr5jn5evxhn7vj27wuetaq-dev",
+                "arn:aws:dynamodb:us-west-1:650251713968:table/TerneuzenOnCallEntry-trakvr5jn5evxhn7vj27wuetaq-dev",
+                "arn:aws:dynamodb:us-west-1:650251713968:table/ITContact-trakvr5jn5evxhn7vj27wuetaq-dev",
+                "arn:aws:dynamodb:us-west-1:650251713968:table/ITOnCallEntry-trakvr5jn5evxhn7vj27wuetaq-dev"
               ]
             }
           ]

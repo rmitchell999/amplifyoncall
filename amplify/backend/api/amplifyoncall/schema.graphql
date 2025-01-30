@@ -1,9 +1,7 @@
-type Contact @model @auth(
-  rules: [
-    { allow: groups, groups: ["TerneuzenAdmin"], operations: [create, read, update, delete] },
-    { allow: groups, groups: ["TerneuzenReadOnly"], operations: [read] }
-  ]
-) {
+type TerneuzenContact @model @auth(rules: [
+  { allow: groups, groups: ["TerneuzenAdmin"], operations: [create, read, update, delete] },
+  { allow: groups, groups: ["TerneuzenReadOnly"], operations: [read] }
+]) {
   id: ID!
   email: String!
   phone: String!
@@ -11,35 +9,80 @@ type Contact @model @auth(
   onCall: Boolean!
 }
 
-type OnCallEntry @model @auth(
-  rules: [
-    { allow: groups, groups: ["TerneuzenAdmin"], operations: [create, read, update, delete] },
-    { allow: groups, groups: ["TerneuzenReadOnly"], operations: [read] }
-  ]
-) {
+type ITContact @model @auth(rules: [
+  { allow: groups, groups: ["ITAdmin"], operations: [create, read, update, delete] },
+  { allow: groups, groups: ["ITReadOnly"], operations: [read] }
+]) {
+  id: ID!
+  email: String!
+  phone: String!
+  name: String!
+  onCall: Boolean!
+}
+
+type TerneuzenOnCallEntry @model @auth(rules: [
+  { allow: groups, groups: ["TerneuzenAdmin"], operations: [create, read, update, delete] },
+  { allow: groups, groups: ["TerneuzenReadOnly"], operations: [read] }
+]) {
   id: ID!
   groupName: String!
   day: String!
   contactID: ID
-  contact: Contact @hasOne(fields: ["contactID"])
+  contact: TerneuzenContact @hasOne(fields: ["contactID"])
   phone: String
   timezone: String
-  startTime: String  # Add this line
+  startTime: String
 }
-input CreateOnCallEntryInput {
+
+type ITOnCallEntry @model @auth(rules: [
+  { allow: groups, groups: ["ITAdmin"], operations: [create, read, update, delete] },
+  { allow: groups, groups: ["ITReadOnly"], operations: [read] }
+]) {
+  id: ID!
+  groupName: String! #Always "IT"
+  day: String!
+  contactID: ID
+  contact: ITContact @hasOne(fields: ["contactID"])
+  phone: String
+  timezone: String
+  startTime: String
+}
+
+# Input types (Keep these largely the same, only necessary changes)
+input CreateTerneuzenOnCallEntryInput {
   groupName: String!
   day: String!
   contactID: ID
   phone: String
-  startTime: String
   timezone: String
+  startTime: String
 }
-input UpdateOnCallEntryInput {
+
+input UpdateTerneuzenOnCallEntryInput {
   id: ID!
   groupName: String
   day: String
   contactID: ID
   phone: String
-  startTime: String
   timezone: String
+  startTime: String
+}
+
+input CreateITOnCallEntryInput {
+  groupName: String!
+  day: String!
+  contactID: ID
+  phone: String
+  timezone: String
+  startTime: String
+}
+
+input UpdateITOnCallEntryInput {
+  id: ID!
+  groupName: String
+  day: String
+  contactID: ID
+  phone: String
+  timezone: String
+  startTime: String
 }

@@ -2,7 +2,7 @@
 /* eslint-disable */
 //  This file was automatically generated and should not be edited.
 
-export type CreateContactInput = {
+export type CreateTerneuzenContactInput = {
   id?: string | null,
   email: string,
   phone: string,
@@ -10,14 +10,14 @@ export type CreateContactInput = {
   onCall: boolean,
 };
 
-export type ModelContactConditionInput = {
+export type ModelTerneuzenContactConditionInput = {
   email?: ModelStringInput | null,
   phone?: ModelStringInput | null,
   name?: ModelStringInput | null,
   onCall?: ModelBooleanInput | null,
-  and?: Array< ModelContactConditionInput | null > | null,
-  or?: Array< ModelContactConditionInput | null > | null,
-  not?: ModelContactConditionInput | null,
+  and?: Array< ModelTerneuzenContactConditionInput | null > | null,
+  or?: Array< ModelTerneuzenContactConditionInput | null > | null,
+  not?: ModelTerneuzenContactConditionInput | null,
   createdAt?: ModelStringInput | null,
   updatedAt?: ModelStringInput | null,
 };
@@ -69,8 +69,8 @@ export type ModelBooleanInput = {
   attributeType?: ModelAttributeTypes | null,
 };
 
-export type Contact = {
-  __typename: "Contact",
+export type TerneuzenContact = {
+  __typename: "TerneuzenContact",
   id: string,
   email: string,
   phone: string,
@@ -80,7 +80,7 @@ export type Contact = {
   updatedAt: string,
 };
 
-export type UpdateContactInput = {
+export type UpdateTerneuzenContactInput = {
   id: string,
   email?: string | null,
   phone?: string | null,
@@ -88,29 +88,72 @@ export type UpdateContactInput = {
   onCall?: boolean | null,
 };
 
-export type DeleteContactInput = {
+export type DeleteTerneuzenContactInput = {
   id: string,
 };
 
-export type CreateOnCallEntryInput = {
+export type CreateITContactInput = {
+  id?: string | null,
+  email: string,
+  phone: string,
+  name: string,
+  onCall: boolean,
+};
+
+export type ModelITContactConditionInput = {
+  email?: ModelStringInput | null,
+  phone?: ModelStringInput | null,
+  name?: ModelStringInput | null,
+  onCall?: ModelBooleanInput | null,
+  and?: Array< ModelITContactConditionInput | null > | null,
+  or?: Array< ModelITContactConditionInput | null > | null,
+  not?: ModelITContactConditionInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+};
+
+export type ITContact = {
+  __typename: "ITContact",
+  id: string,
+  email: string,
+  phone: string,
+  name: string,
+  onCall: boolean,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type UpdateITContactInput = {
+  id: string,
+  email?: string | null,
+  phone?: string | null,
+  name?: string | null,
+  onCall?: boolean | null,
+};
+
+export type DeleteITContactInput = {
+  id: string,
+};
+
+export type CreateTerneuzenOnCallEntryInput = {
   groupName: string,
   day: string,
   contactID?: string | null,
   phone?: string | null,
-  startTime?: string | null,
   timezone?: string | null,
+  startTime?: string | null,
 };
 
-export type ModelOnCallEntryConditionInput = {
+export type ModelTerneuzenOnCallEntryConditionInput = {
   groupName?: ModelStringInput | null,
   day?: ModelStringInput | null,
   contactID?: ModelIDInput | null,
   phone?: ModelStringInput | null,
   timezone?: ModelStringInput | null,
   startTime?: ModelStringInput | null,
-  and?: Array< ModelOnCallEntryConditionInput | null > | null,
-  or?: Array< ModelOnCallEntryConditionInput | null > | null,
-  not?: ModelOnCallEntryConditionInput | null,
+  and?: Array< ModelTerneuzenOnCallEntryConditionInput | null > | null,
+  or?: Array< ModelTerneuzenOnCallEntryConditionInput | null > | null,
+  not?: ModelTerneuzenOnCallEntryConditionInput | null,
   createdAt?: ModelStringInput | null,
   updatedAt?: ModelStringInput | null,
 };
@@ -131,13 +174,13 @@ export type ModelIDInput = {
   size?: ModelSizeInput | null,
 };
 
-export type OnCallEntry = {
-  __typename: "OnCallEntry",
+export type TerneuzenOnCallEntry = {
+  __typename: "TerneuzenOnCallEntry",
   id: string,
   groupName: string,
   day: string,
   contactID?: string | null,
-  contact?: Contact | null,
+  contact?: TerneuzenContact | null,
   phone?: string | null,
   timezone?: string | null,
   startTime?: string | null,
@@ -145,21 +188,72 @@ export type OnCallEntry = {
   updatedAt: string,
 };
 
-export type UpdateOnCallEntryInput = {
+export type UpdateTerneuzenOnCallEntryInput = {
   id: string,
   groupName?: string | null,
   day?: string | null,
   contactID?: string | null,
   phone?: string | null,
-  startTime?: string | null,
   timezone?: string | null,
+  startTime?: string | null,
 };
 
-export type DeleteOnCallEntryInput = {
+export type DeleteTerneuzenOnCallEntryInput = {
   id: string,
 };
 
-export type ModelContactFilterInput = {
+export type CreateITOnCallEntryInput = {
+  groupName: string,
+  day: string,
+  contactID?: string | null,
+  phone?: string | null,
+  timezone?: string | null,
+  startTime?: string | null,
+};
+
+export type ModelITOnCallEntryConditionInput = {
+  groupName?: ModelStringInput | null,
+  day?: ModelStringInput | null,
+  contactID?: ModelIDInput | null,
+  phone?: ModelStringInput | null,
+  timezone?: ModelStringInput | null,
+  startTime?: ModelStringInput | null,
+  and?: Array< ModelITOnCallEntryConditionInput | null > | null,
+  or?: Array< ModelITOnCallEntryConditionInput | null > | null,
+  not?: ModelITOnCallEntryConditionInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+};
+
+export type ITOnCallEntry = {
+  __typename: "ITOnCallEntry",
+  id: string,
+  groupName: string,
+  day: string,
+  contactID?: string | null,
+  contact?: ITContact | null,
+  phone?: string | null,
+  timezone?: string | null,
+  startTime?: string | null,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type UpdateITOnCallEntryInput = {
+  id: string,
+  groupName?: string | null,
+  day?: string | null,
+  contactID?: string | null,
+  phone?: string | null,
+  timezone?: string | null,
+  startTime?: string | null,
+};
+
+export type DeleteITOnCallEntryInput = {
+  id: string,
+};
+
+export type ModelTerneuzenContactFilterInput = {
   id?: ModelIDInput | null,
   email?: ModelStringInput | null,
   phone?: ModelStringInput | null,
@@ -167,18 +261,37 @@ export type ModelContactFilterInput = {
   onCall?: ModelBooleanInput | null,
   createdAt?: ModelStringInput | null,
   updatedAt?: ModelStringInput | null,
-  and?: Array< ModelContactFilterInput | null > | null,
-  or?: Array< ModelContactFilterInput | null > | null,
-  not?: ModelContactFilterInput | null,
+  and?: Array< ModelTerneuzenContactFilterInput | null > | null,
+  or?: Array< ModelTerneuzenContactFilterInput | null > | null,
+  not?: ModelTerneuzenContactFilterInput | null,
 };
 
-export type ModelContactConnection = {
-  __typename: "ModelContactConnection",
-  items:  Array<Contact | null >,
+export type ModelTerneuzenContactConnection = {
+  __typename: "ModelTerneuzenContactConnection",
+  items:  Array<TerneuzenContact | null >,
   nextToken?: string | null,
 };
 
-export type ModelOnCallEntryFilterInput = {
+export type ModelITContactFilterInput = {
+  id?: ModelIDInput | null,
+  email?: ModelStringInput | null,
+  phone?: ModelStringInput | null,
+  name?: ModelStringInput | null,
+  onCall?: ModelBooleanInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  and?: Array< ModelITContactFilterInput | null > | null,
+  or?: Array< ModelITContactFilterInput | null > | null,
+  not?: ModelITContactFilterInput | null,
+};
+
+export type ModelITContactConnection = {
+  __typename: "ModelITContactConnection",
+  items:  Array<ITContact | null >,
+  nextToken?: string | null,
+};
+
+export type ModelTerneuzenOnCallEntryFilterInput = {
   id?: ModelIDInput | null,
   groupName?: ModelStringInput | null,
   day?: ModelStringInput | null,
@@ -188,18 +301,39 @@ export type ModelOnCallEntryFilterInput = {
   startTime?: ModelStringInput | null,
   createdAt?: ModelStringInput | null,
   updatedAt?: ModelStringInput | null,
-  and?: Array< ModelOnCallEntryFilterInput | null > | null,
-  or?: Array< ModelOnCallEntryFilterInput | null > | null,
-  not?: ModelOnCallEntryFilterInput | null,
+  and?: Array< ModelTerneuzenOnCallEntryFilterInput | null > | null,
+  or?: Array< ModelTerneuzenOnCallEntryFilterInput | null > | null,
+  not?: ModelTerneuzenOnCallEntryFilterInput | null,
 };
 
-export type ModelOnCallEntryConnection = {
-  __typename: "ModelOnCallEntryConnection",
-  items:  Array<OnCallEntry | null >,
+export type ModelTerneuzenOnCallEntryConnection = {
+  __typename: "ModelTerneuzenOnCallEntryConnection",
+  items:  Array<TerneuzenOnCallEntry | null >,
   nextToken?: string | null,
 };
 
-export type ModelSubscriptionContactFilterInput = {
+export type ModelITOnCallEntryFilterInput = {
+  id?: ModelIDInput | null,
+  groupName?: ModelStringInput | null,
+  day?: ModelStringInput | null,
+  contactID?: ModelIDInput | null,
+  phone?: ModelStringInput | null,
+  timezone?: ModelStringInput | null,
+  startTime?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  and?: Array< ModelITOnCallEntryFilterInput | null > | null,
+  or?: Array< ModelITOnCallEntryFilterInput | null > | null,
+  not?: ModelITOnCallEntryFilterInput | null,
+};
+
+export type ModelITOnCallEntryConnection = {
+  __typename: "ModelITOnCallEntryConnection",
+  items:  Array<ITOnCallEntry | null >,
+  nextToken?: string | null,
+};
+
+export type ModelSubscriptionTerneuzenContactFilterInput = {
   id?: ModelSubscriptionIDInput | null,
   email?: ModelSubscriptionStringInput | null,
   phone?: ModelSubscriptionStringInput | null,
@@ -207,8 +341,8 @@ export type ModelSubscriptionContactFilterInput = {
   onCall?: ModelSubscriptionBooleanInput | null,
   createdAt?: ModelSubscriptionStringInput | null,
   updatedAt?: ModelSubscriptionStringInput | null,
-  and?: Array< ModelSubscriptionContactFilterInput | null > | null,
-  or?: Array< ModelSubscriptionContactFilterInput | null > | null,
+  and?: Array< ModelSubscriptionTerneuzenContactFilterInput | null > | null,
+  or?: Array< ModelSubscriptionTerneuzenContactFilterInput | null > | null,
 };
 
 export type ModelSubscriptionIDInput = {
@@ -246,7 +380,19 @@ export type ModelSubscriptionBooleanInput = {
   eq?: boolean | null,
 };
 
-export type ModelSubscriptionOnCallEntryFilterInput = {
+export type ModelSubscriptionITContactFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  email?: ModelSubscriptionStringInput | null,
+  phone?: ModelSubscriptionStringInput | null,
+  name?: ModelSubscriptionStringInput | null,
+  onCall?: ModelSubscriptionBooleanInput | null,
+  createdAt?: ModelSubscriptionStringInput | null,
+  updatedAt?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionITContactFilterInput | null > | null,
+  or?: Array< ModelSubscriptionITContactFilterInput | null > | null,
+};
+
+export type ModelSubscriptionTerneuzenOnCallEntryFilterInput = {
   id?: ModelSubscriptionIDInput | null,
   groupName?: ModelSubscriptionStringInput | null,
   day?: ModelSubscriptionStringInput | null,
@@ -256,18 +402,32 @@ export type ModelSubscriptionOnCallEntryFilterInput = {
   startTime?: ModelSubscriptionStringInput | null,
   createdAt?: ModelSubscriptionStringInput | null,
   updatedAt?: ModelSubscriptionStringInput | null,
-  and?: Array< ModelSubscriptionOnCallEntryFilterInput | null > | null,
-  or?: Array< ModelSubscriptionOnCallEntryFilterInput | null > | null,
+  and?: Array< ModelSubscriptionTerneuzenOnCallEntryFilterInput | null > | null,
+  or?: Array< ModelSubscriptionTerneuzenOnCallEntryFilterInput | null > | null,
 };
 
-export type CreateContactMutationVariables = {
-  input: CreateContactInput,
-  condition?: ModelContactConditionInput | null,
+export type ModelSubscriptionITOnCallEntryFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  groupName?: ModelSubscriptionStringInput | null,
+  day?: ModelSubscriptionStringInput | null,
+  contactID?: ModelSubscriptionIDInput | null,
+  phone?: ModelSubscriptionStringInput | null,
+  timezone?: ModelSubscriptionStringInput | null,
+  startTime?: ModelSubscriptionStringInput | null,
+  createdAt?: ModelSubscriptionStringInput | null,
+  updatedAt?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionITOnCallEntryFilterInput | null > | null,
+  or?: Array< ModelSubscriptionITOnCallEntryFilterInput | null > | null,
 };
 
-export type CreateContactMutation = {
-  createContact?:  {
-    __typename: "Contact",
+export type CreateTerneuzenContactMutationVariables = {
+  input: CreateTerneuzenContactInput,
+  condition?: ModelTerneuzenContactConditionInput | null,
+};
+
+export type CreateTerneuzenContactMutation = {
+  createTerneuzenContact?:  {
+    __typename: "TerneuzenContact",
     id: string,
     email: string,
     phone: string,
@@ -278,14 +438,14 @@ export type CreateContactMutation = {
   } | null,
 };
 
-export type UpdateContactMutationVariables = {
-  input: UpdateContactInput,
-  condition?: ModelContactConditionInput | null,
+export type UpdateTerneuzenContactMutationVariables = {
+  input: UpdateTerneuzenContactInput,
+  condition?: ModelTerneuzenContactConditionInput | null,
 };
 
-export type UpdateContactMutation = {
-  updateContact?:  {
-    __typename: "Contact",
+export type UpdateTerneuzenContactMutation = {
+  updateTerneuzenContact?:  {
+    __typename: "TerneuzenContact",
     id: string,
     email: string,
     phone: string,
@@ -296,14 +456,14 @@ export type UpdateContactMutation = {
   } | null,
 };
 
-export type DeleteContactMutationVariables = {
-  input: DeleteContactInput,
-  condition?: ModelContactConditionInput | null,
+export type DeleteTerneuzenContactMutationVariables = {
+  input: DeleteTerneuzenContactInput,
+  condition?: ModelTerneuzenContactConditionInput | null,
 };
 
-export type DeleteContactMutation = {
-  deleteContact?:  {
-    __typename: "Contact",
+export type DeleteTerneuzenContactMutation = {
+  deleteTerneuzenContact?:  {
+    __typename: "TerneuzenContact",
     id: string,
     email: string,
     phone: string,
@@ -314,20 +474,74 @@ export type DeleteContactMutation = {
   } | null,
 };
 
-export type CreateOnCallEntryMutationVariables = {
-  input: CreateOnCallEntryInput,
-  condition?: ModelOnCallEntryConditionInput | null,
+export type CreateITContactMutationVariables = {
+  input: CreateITContactInput,
+  condition?: ModelITContactConditionInput | null,
 };
 
-export type CreateOnCallEntryMutation = {
-  createOnCallEntry?:  {
-    __typename: "OnCallEntry",
+export type CreateITContactMutation = {
+  createITContact?:  {
+    __typename: "ITContact",
+    id: string,
+    email: string,
+    phone: string,
+    name: string,
+    onCall: boolean,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateITContactMutationVariables = {
+  input: UpdateITContactInput,
+  condition?: ModelITContactConditionInput | null,
+};
+
+export type UpdateITContactMutation = {
+  updateITContact?:  {
+    __typename: "ITContact",
+    id: string,
+    email: string,
+    phone: string,
+    name: string,
+    onCall: boolean,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteITContactMutationVariables = {
+  input: DeleteITContactInput,
+  condition?: ModelITContactConditionInput | null,
+};
+
+export type DeleteITContactMutation = {
+  deleteITContact?:  {
+    __typename: "ITContact",
+    id: string,
+    email: string,
+    phone: string,
+    name: string,
+    onCall: boolean,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type CreateTerneuzenOnCallEntryMutationVariables = {
+  input: CreateTerneuzenOnCallEntryInput,
+  condition?: ModelTerneuzenOnCallEntryConditionInput | null,
+};
+
+export type CreateTerneuzenOnCallEntryMutation = {
+  createTerneuzenOnCallEntry?:  {
+    __typename: "TerneuzenOnCallEntry",
     id: string,
     groupName: string,
     day: string,
     contactID?: string | null,
     contact?:  {
-      __typename: "Contact",
+      __typename: "TerneuzenContact",
       id: string,
       email: string,
       phone: string,
@@ -344,20 +558,20 @@ export type CreateOnCallEntryMutation = {
   } | null,
 };
 
-export type UpdateOnCallEntryMutationVariables = {
-  input: UpdateOnCallEntryInput,
-  condition?: ModelOnCallEntryConditionInput | null,
+export type UpdateTerneuzenOnCallEntryMutationVariables = {
+  input: UpdateTerneuzenOnCallEntryInput,
+  condition?: ModelTerneuzenOnCallEntryConditionInput | null,
 };
 
-export type UpdateOnCallEntryMutation = {
-  updateOnCallEntry?:  {
-    __typename: "OnCallEntry",
+export type UpdateTerneuzenOnCallEntryMutation = {
+  updateTerneuzenOnCallEntry?:  {
+    __typename: "TerneuzenOnCallEntry",
     id: string,
     groupName: string,
     day: string,
     contactID?: string | null,
     contact?:  {
-      __typename: "Contact",
+      __typename: "TerneuzenContact",
       id: string,
       email: string,
       phone: string,
@@ -374,20 +588,20 @@ export type UpdateOnCallEntryMutation = {
   } | null,
 };
 
-export type DeleteOnCallEntryMutationVariables = {
-  input: DeleteOnCallEntryInput,
-  condition?: ModelOnCallEntryConditionInput | null,
+export type DeleteTerneuzenOnCallEntryMutationVariables = {
+  input: DeleteTerneuzenOnCallEntryInput,
+  condition?: ModelTerneuzenOnCallEntryConditionInput | null,
 };
 
-export type DeleteOnCallEntryMutation = {
-  deleteOnCallEntry?:  {
-    __typename: "OnCallEntry",
+export type DeleteTerneuzenOnCallEntryMutation = {
+  deleteTerneuzenOnCallEntry?:  {
+    __typename: "TerneuzenOnCallEntry",
     id: string,
     groupName: string,
     day: string,
     contactID?: string | null,
     contact?:  {
-      __typename: "Contact",
+      __typename: "TerneuzenContact",
       id: string,
       email: string,
       phone: string,
@@ -404,13 +618,103 @@ export type DeleteOnCallEntryMutation = {
   } | null,
 };
 
-export type GetContactQueryVariables = {
+export type CreateITOnCallEntryMutationVariables = {
+  input: CreateITOnCallEntryInput,
+  condition?: ModelITOnCallEntryConditionInput | null,
+};
+
+export type CreateITOnCallEntryMutation = {
+  createITOnCallEntry?:  {
+    __typename: "ITOnCallEntry",
+    id: string,
+    groupName: string,
+    day: string,
+    contactID?: string | null,
+    contact?:  {
+      __typename: "ITContact",
+      id: string,
+      email: string,
+      phone: string,
+      name: string,
+      onCall: boolean,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    phone?: string | null,
+    timezone?: string | null,
+    startTime?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateITOnCallEntryMutationVariables = {
+  input: UpdateITOnCallEntryInput,
+  condition?: ModelITOnCallEntryConditionInput | null,
+};
+
+export type UpdateITOnCallEntryMutation = {
+  updateITOnCallEntry?:  {
+    __typename: "ITOnCallEntry",
+    id: string,
+    groupName: string,
+    day: string,
+    contactID?: string | null,
+    contact?:  {
+      __typename: "ITContact",
+      id: string,
+      email: string,
+      phone: string,
+      name: string,
+      onCall: boolean,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    phone?: string | null,
+    timezone?: string | null,
+    startTime?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteITOnCallEntryMutationVariables = {
+  input: DeleteITOnCallEntryInput,
+  condition?: ModelITOnCallEntryConditionInput | null,
+};
+
+export type DeleteITOnCallEntryMutation = {
+  deleteITOnCallEntry?:  {
+    __typename: "ITOnCallEntry",
+    id: string,
+    groupName: string,
+    day: string,
+    contactID?: string | null,
+    contact?:  {
+      __typename: "ITContact",
+      id: string,
+      email: string,
+      phone: string,
+      name: string,
+      onCall: boolean,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    phone?: string | null,
+    timezone?: string | null,
+    startTime?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type GetTerneuzenContactQueryVariables = {
   id: string,
 };
 
-export type GetContactQuery = {
-  getContact?:  {
-    __typename: "Contact",
+export type GetTerneuzenContactQuery = {
+  getTerneuzenContact?:  {
+    __typename: "TerneuzenContact",
     id: string,
     email: string,
     phone: string,
@@ -421,17 +725,17 @@ export type GetContactQuery = {
   } | null,
 };
 
-export type ListContactsQueryVariables = {
-  filter?: ModelContactFilterInput | null,
+export type ListTerneuzenContactsQueryVariables = {
+  filter?: ModelTerneuzenContactFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
 };
 
-export type ListContactsQuery = {
-  listContacts?:  {
-    __typename: "ModelContactConnection",
+export type ListTerneuzenContactsQuery = {
+  listTerneuzenContacts?:  {
+    __typename: "ModelTerneuzenContactConnection",
     items:  Array< {
-      __typename: "Contact",
+      __typename: "TerneuzenContact",
       id: string,
       email: string,
       phone: string,
@@ -444,19 +748,59 @@ export type ListContactsQuery = {
   } | null,
 };
 
-export type GetOnCallEntryQueryVariables = {
+export type GetITContactQueryVariables = {
   id: string,
 };
 
-export type GetOnCallEntryQuery = {
-  getOnCallEntry?:  {
-    __typename: "OnCallEntry",
+export type GetITContactQuery = {
+  getITContact?:  {
+    __typename: "ITContact",
+    id: string,
+    email: string,
+    phone: string,
+    name: string,
+    onCall: boolean,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListITContactsQueryVariables = {
+  filter?: ModelITContactFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListITContactsQuery = {
+  listITContacts?:  {
+    __typename: "ModelITContactConnection",
+    items:  Array< {
+      __typename: "ITContact",
+      id: string,
+      email: string,
+      phone: string,
+      name: string,
+      onCall: boolean,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetTerneuzenOnCallEntryQueryVariables = {
+  id: string,
+};
+
+export type GetTerneuzenOnCallEntryQuery = {
+  getTerneuzenOnCallEntry?:  {
+    __typename: "TerneuzenOnCallEntry",
     id: string,
     groupName: string,
     day: string,
     contactID?: string | null,
     contact?:  {
-      __typename: "Contact",
+      __typename: "TerneuzenContact",
       id: string,
       email: string,
       phone: string,
@@ -473,17 +817,17 @@ export type GetOnCallEntryQuery = {
   } | null,
 };
 
-export type ListOnCallEntriesQueryVariables = {
-  filter?: ModelOnCallEntryFilterInput | null,
+export type ListTerneuzenOnCallEntriesQueryVariables = {
+  filter?: ModelTerneuzenOnCallEntryFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
 };
 
-export type ListOnCallEntriesQuery = {
-  listOnCallEntries?:  {
-    __typename: "ModelOnCallEntryConnection",
+export type ListTerneuzenOnCallEntriesQuery = {
+  listTerneuzenOnCallEntries?:  {
+    __typename: "ModelTerneuzenOnCallEntryConnection",
     items:  Array< {
-      __typename: "OnCallEntry",
+      __typename: "TerneuzenOnCallEntry",
       id: string,
       groupName: string,
       day: string,
@@ -498,70 +842,19 @@ export type ListOnCallEntriesQuery = {
   } | null,
 };
 
-export type OnCreateContactSubscriptionVariables = {
-  filter?: ModelSubscriptionContactFilterInput | null,
+export type GetITOnCallEntryQueryVariables = {
+  id: string,
 };
 
-export type OnCreateContactSubscription = {
-  onCreateContact?:  {
-    __typename: "Contact",
-    id: string,
-    email: string,
-    phone: string,
-    name: string,
-    onCall: boolean,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type OnUpdateContactSubscriptionVariables = {
-  filter?: ModelSubscriptionContactFilterInput | null,
-};
-
-export type OnUpdateContactSubscription = {
-  onUpdateContact?:  {
-    __typename: "Contact",
-    id: string,
-    email: string,
-    phone: string,
-    name: string,
-    onCall: boolean,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type OnDeleteContactSubscriptionVariables = {
-  filter?: ModelSubscriptionContactFilterInput | null,
-};
-
-export type OnDeleteContactSubscription = {
-  onDeleteContact?:  {
-    __typename: "Contact",
-    id: string,
-    email: string,
-    phone: string,
-    name: string,
-    onCall: boolean,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type OnCreateOnCallEntrySubscriptionVariables = {
-  filter?: ModelSubscriptionOnCallEntryFilterInput | null,
-};
-
-export type OnCreateOnCallEntrySubscription = {
-  onCreateOnCallEntry?:  {
-    __typename: "OnCallEntry",
+export type GetITOnCallEntryQuery = {
+  getITOnCallEntry?:  {
+    __typename: "ITOnCallEntry",
     id: string,
     groupName: string,
     day: string,
     contactID?: string | null,
     contact?:  {
-      __typename: "Contact",
+      __typename: "ITContact",
       id: string,
       email: string,
       phone: string,
@@ -578,19 +871,146 @@ export type OnCreateOnCallEntrySubscription = {
   } | null,
 };
 
-export type OnUpdateOnCallEntrySubscriptionVariables = {
-  filter?: ModelSubscriptionOnCallEntryFilterInput | null,
+export type ListITOnCallEntriesQueryVariables = {
+  filter?: ModelITOnCallEntryFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
 };
 
-export type OnUpdateOnCallEntrySubscription = {
-  onUpdateOnCallEntry?:  {
-    __typename: "OnCallEntry",
+export type ListITOnCallEntriesQuery = {
+  listITOnCallEntries?:  {
+    __typename: "ModelITOnCallEntryConnection",
+    items:  Array< {
+      __typename: "ITOnCallEntry",
+      id: string,
+      groupName: string,
+      day: string,
+      contactID?: string | null,
+      phone?: string | null,
+      timezone?: string | null,
+      startTime?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type OnCreateTerneuzenContactSubscriptionVariables = {
+  filter?: ModelSubscriptionTerneuzenContactFilterInput | null,
+};
+
+export type OnCreateTerneuzenContactSubscription = {
+  onCreateTerneuzenContact?:  {
+    __typename: "TerneuzenContact",
+    id: string,
+    email: string,
+    phone: string,
+    name: string,
+    onCall: boolean,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateTerneuzenContactSubscriptionVariables = {
+  filter?: ModelSubscriptionTerneuzenContactFilterInput | null,
+};
+
+export type OnUpdateTerneuzenContactSubscription = {
+  onUpdateTerneuzenContact?:  {
+    __typename: "TerneuzenContact",
+    id: string,
+    email: string,
+    phone: string,
+    name: string,
+    onCall: boolean,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteTerneuzenContactSubscriptionVariables = {
+  filter?: ModelSubscriptionTerneuzenContactFilterInput | null,
+};
+
+export type OnDeleteTerneuzenContactSubscription = {
+  onDeleteTerneuzenContact?:  {
+    __typename: "TerneuzenContact",
+    id: string,
+    email: string,
+    phone: string,
+    name: string,
+    onCall: boolean,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateITContactSubscriptionVariables = {
+  filter?: ModelSubscriptionITContactFilterInput | null,
+};
+
+export type OnCreateITContactSubscription = {
+  onCreateITContact?:  {
+    __typename: "ITContact",
+    id: string,
+    email: string,
+    phone: string,
+    name: string,
+    onCall: boolean,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateITContactSubscriptionVariables = {
+  filter?: ModelSubscriptionITContactFilterInput | null,
+};
+
+export type OnUpdateITContactSubscription = {
+  onUpdateITContact?:  {
+    __typename: "ITContact",
+    id: string,
+    email: string,
+    phone: string,
+    name: string,
+    onCall: boolean,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteITContactSubscriptionVariables = {
+  filter?: ModelSubscriptionITContactFilterInput | null,
+};
+
+export type OnDeleteITContactSubscription = {
+  onDeleteITContact?:  {
+    __typename: "ITContact",
+    id: string,
+    email: string,
+    phone: string,
+    name: string,
+    onCall: boolean,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateTerneuzenOnCallEntrySubscriptionVariables = {
+  filter?: ModelSubscriptionTerneuzenOnCallEntryFilterInput | null,
+};
+
+export type OnCreateTerneuzenOnCallEntrySubscription = {
+  onCreateTerneuzenOnCallEntry?:  {
+    __typename: "TerneuzenOnCallEntry",
     id: string,
     groupName: string,
     day: string,
     contactID?: string | null,
     contact?:  {
-      __typename: "Contact",
+      __typename: "TerneuzenContact",
       id: string,
       email: string,
       phone: string,
@@ -607,19 +1027,135 @@ export type OnUpdateOnCallEntrySubscription = {
   } | null,
 };
 
-export type OnDeleteOnCallEntrySubscriptionVariables = {
-  filter?: ModelSubscriptionOnCallEntryFilterInput | null,
+export type OnUpdateTerneuzenOnCallEntrySubscriptionVariables = {
+  filter?: ModelSubscriptionTerneuzenOnCallEntryFilterInput | null,
 };
 
-export type OnDeleteOnCallEntrySubscription = {
-  onDeleteOnCallEntry?:  {
-    __typename: "OnCallEntry",
+export type OnUpdateTerneuzenOnCallEntrySubscription = {
+  onUpdateTerneuzenOnCallEntry?:  {
+    __typename: "TerneuzenOnCallEntry",
     id: string,
     groupName: string,
     day: string,
     contactID?: string | null,
     contact?:  {
-      __typename: "Contact",
+      __typename: "TerneuzenContact",
+      id: string,
+      email: string,
+      phone: string,
+      name: string,
+      onCall: boolean,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    phone?: string | null,
+    timezone?: string | null,
+    startTime?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteTerneuzenOnCallEntrySubscriptionVariables = {
+  filter?: ModelSubscriptionTerneuzenOnCallEntryFilterInput | null,
+};
+
+export type OnDeleteTerneuzenOnCallEntrySubscription = {
+  onDeleteTerneuzenOnCallEntry?:  {
+    __typename: "TerneuzenOnCallEntry",
+    id: string,
+    groupName: string,
+    day: string,
+    contactID?: string | null,
+    contact?:  {
+      __typename: "TerneuzenContact",
+      id: string,
+      email: string,
+      phone: string,
+      name: string,
+      onCall: boolean,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    phone?: string | null,
+    timezone?: string | null,
+    startTime?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateITOnCallEntrySubscriptionVariables = {
+  filter?: ModelSubscriptionITOnCallEntryFilterInput | null,
+};
+
+export type OnCreateITOnCallEntrySubscription = {
+  onCreateITOnCallEntry?:  {
+    __typename: "ITOnCallEntry",
+    id: string,
+    groupName: string,
+    day: string,
+    contactID?: string | null,
+    contact?:  {
+      __typename: "ITContact",
+      id: string,
+      email: string,
+      phone: string,
+      name: string,
+      onCall: boolean,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    phone?: string | null,
+    timezone?: string | null,
+    startTime?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateITOnCallEntrySubscriptionVariables = {
+  filter?: ModelSubscriptionITOnCallEntryFilterInput | null,
+};
+
+export type OnUpdateITOnCallEntrySubscription = {
+  onUpdateITOnCallEntry?:  {
+    __typename: "ITOnCallEntry",
+    id: string,
+    groupName: string,
+    day: string,
+    contactID?: string | null,
+    contact?:  {
+      __typename: "ITContact",
+      id: string,
+      email: string,
+      phone: string,
+      name: string,
+      onCall: boolean,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    phone?: string | null,
+    timezone?: string | null,
+    startTime?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteITOnCallEntrySubscriptionVariables = {
+  filter?: ModelSubscriptionITOnCallEntryFilterInput | null,
+};
+
+export type OnDeleteITOnCallEntrySubscription = {
+  onDeleteITOnCallEntry?:  {
+    __typename: "ITOnCallEntry",
+    id: string,
+    groupName: string,
+    day: string,
+    contactID?: string | null,
+    contact?:  {
+      __typename: "ITContact",
       id: string,
       email: string,
       phone: string,

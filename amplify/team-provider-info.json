@@ -24,6 +24,9 @@
       },
       "storage": {
         "s3storage": {}
+      },
+      "api": {
+        "amplifyoncall": {}
       }
     }
   }

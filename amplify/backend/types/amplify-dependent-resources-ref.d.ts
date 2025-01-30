@@ -16,6 +16,9 @@ export type AmplifyDependentResourcesAttributes = {
       "UserPoolName": "string"
     },
     "userPoolGroups": {
+      "GlobalAdminGroupRole": "string",
+      "ITAdminGroupRole": "string",
+      "ITReadOnlyGroupRole": "string",
       "TerneuzenAdminGroupRole": "string",
       "TerneuzenReadOnlyGroupRole": "string"
     }
