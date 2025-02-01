@@ -107,12 +107,12 @@
 
 /* Add hover effects if desired: */
 .terneuzen-button:hover {
-  background-color: #4dc1d2; /* Darker green on hover */
+  background-color: #5A6770; /* Darker green on hover */
   color: rgb(255, 255, 255);
 }
 
 .it-button:hover {
-  background-color: #4dc1d2; /* Darker red on hover */
+  background-color: #5A6770; /* Darker red on hover */
   color: rgb(255, 255, 255);
 }
 </style>

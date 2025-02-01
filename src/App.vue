@@ -112,7 +112,7 @@ export default defineComponent({
 
 
 .dashboard-title {
-  color: white;
+  color: #ffffff;
   padding: 0px; /* Reduced padding */
   flex-grow: 1; /* Occupy remaining space */
   text-align: center; /* Center the title */
@@ -120,8 +120,8 @@ export default defineComponent({
 
 main {
   margin-top: 0px;
-  padding: 0px;
-  background-color: #f8f8f8;
+  padding: 10px;
+  background-color: #3ab0b3;
 }
 
 /* List Styles */
@@ -141,7 +141,7 @@ ul {
 
 li {
   background-color: #f9f9f9;
-  padding: 8px;
+  padding: 0px;
   transition: background-color 0.3s;
 }
 
@@ -149,7 +149,7 @@ li {
 a {
   font-weight: 800;
   text-decoration: none;
-  color: #4dc1d2;
+  color: #ffffff;
 }
 
 a:hover {
