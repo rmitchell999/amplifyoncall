@@ -1,6 +1,7 @@
 type TerneuzenContact @model @auth(rules: [
   { allow: groups, groups: ["TerneuzenAdmin"], operations: [create, read, update, delete] },
   { allow: groups, groups: ["TerneuzenReadOnly"], operations: [read] }
+  { allow: groups, groups: ["GlobalAdmin"], operations: [create, read, update, delete] },
 ]) {
   id: ID!
   email: String!
@@ -12,6 +13,7 @@ type TerneuzenContact @model @auth(rules: [
 type ITContact @model @auth(rules: [
   { allow: groups, groups: ["ITAdmin"], operations: [create, read, update, delete] },
   { allow: groups, groups: ["ITReadOnly"], operations: [read] }
+  { allow: groups, groups: ["GlobalAdmin"], operations: [create, read, update, delete] },
 ]) {
   id: ID!
   email: String!
@@ -23,6 +25,7 @@ type ITContact @model @auth(rules: [
 type TerneuzenOnCallEntry @model @auth(rules: [
   { allow: groups, groups: ["TerneuzenAdmin"], operations: [create, read, update, delete] },
   { allow: groups, groups: ["TerneuzenReadOnly"], operations: [read] }
+  { allow: groups, groups: ["GlobalAdmin"], operations: [create, read, update, delete] },
 ]) {
   id: ID!
   groupName: String!
@@ -37,6 +40,7 @@ type TerneuzenOnCallEntry @model @auth(rules: [
 type ITOnCallEntry @model @auth(rules: [
   { allow: groups, groups: ["ITAdmin"], operations: [create, read, update, delete] },
   { allow: groups, groups: ["ITReadOnly"], operations: [read] }
+  { allow: groups, groups: ["GlobalAdmin"], operations: [create, read, update, delete] },
 ]) {
   id: ID!
   groupName: String! #Always "IT"

@@ -1,26 +1,47 @@
 .on-call-application {
-  padding: 100px;
-  font-family: 'Open Sans', sans-serif;
-  background-color: #fff; /* Keep white for the app background */
-  color: #333;
-  min-height: 50vh;
+  background-color: #fff; /* White background */
+  color: #000; /* Black text */
+  min-height: 70vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  padding-top: 20px;
+  padding: 15px; /* Consistent padding */
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1); /* Subtle shadow */
+  box-sizing: border-box;
 }
 
 .header {
   display: flex;
-  justify-content: flex-end;
+  align-items: center; /* Align items vertically */
+  justify-content: space-between; /* Space between title/buttons and logout */
   width: 100%;
-  padding: 5px;
-  background-color: #fff; /* Keep white */
+  padding: 20px; /* Adjust padding as needed */
 }
 
+.header h1 {
+  margin-bottom: 0px; /* Remove default margin */
+  padding: 0px;
+  background-image: url('@/assets/logo.png'); /* Adjust path as needed */
+  background-size: cover; /* Make the background image cover the entire container */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Prevent repetition of the logo */
+  width: 85%;
+  height: 180px;
+  border-radius: 10px;
+}
+
+.header h3 {
+  font-family: 'Aptos', sans-serif; /* Using the Aptos font */
+  display: flex;
+  align-items: center; /* Align items vertically */
+  color: #ffffff; /* Adjust the color as needed */
+}
+
+
 .logout-button {
-  background-color: #dc3545; /* Keep red for logout */
+  background-color: #c82333; /* Red */
   color: white;
   border: none;
   padding: 10px 20px;
@@ -30,35 +51,46 @@
 }
 
 .logout-button:hover {
-  background-color: #c82333; /* Darker red on hover */
+  background-color: #a01724; /* Darker red on hover */
 }
 
 .tabs {
-  margin-bottom: 25px;
+  margin-bottom: 20px;
   display: flex;
   justify-content: center;
   width: 100%;
 }
 
-.tabs button {
-  margin: 0 20px;
-  padding: 10px 20px; /* Fixed padding */
+.tabs button { /* Apply button styles to buttons within tabs */
+  margin-left: 10px; /* Adjust button margins here */
+  padding: 10px 20px; /* Add padding to buttons for aesthetics */
+  background-color: #3ab0b3; /* Semi-transparent background for buttons */
+  color: white;
   border: none;
-  background-color: #4dc1d2; /* Teal */
-  color: #fff;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s;
+
 }
 
 .tabs button.active {
-  background-color: #3ab0b3; /* Darker teal for active tab */
+  background-color: #5A6770;
 }
-
 .tabs button:hover {
-  background-color: #3ab0b3; /* Darker teal on hover */
+  background-color: #5A6770;
 }
 
+.schedule-container { /* New container for better control */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Responsive grid */
+  grid-gap: 10px;
+}
+
+.schedule-item { /* Style for each day's schedule */
+  background-color: #4dc1d2; /* Teal background */
+  padding: 10px;
+  border-radius: 5px;
+  box-sizing: border-box; /* Include padding in the element's width */
+}
 .schedule-options {
   display: flex;
   justify-content: space-between;
@@ -85,102 +117,101 @@ select {
   transition: background-color 0.3s;
 }
 
-button {
-  color: #fff;
-}
-
-button:hover {
-  background-color: #e9ecef; /* Slightly lighter background on hover */
-}
-
 .action-buttons {
-  margin-top: 12px;
   display: flex;
-  justify-content: flex-start; /* Align items to the left */
+  justify-content: flex-start;
   width: 100%;
-  margin-bottom: 20px; /* Add bottom margin for separation */
+  margin-top: 30px;
+  background-color: #fff;
 }
 
 .action-buttons button {
-  margin-right: 20px; /* Add right margin for separation */
-  padding: 10px 20px; /* Adjust padding as needed */
+  color: white;
+  background-color: #3ab0b3;
   border: none;
-  background-color: #4dc1d2; /* Teal background for action buttons */
-  color: #fff; /* White text */
+  padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.0s;
 }
 
+.action-buttons button:hover {
+  background-color: #5A6770; /* Highlight color on hover */
+}
+
+/* Table Styles */
 .table {
   width: 100%;
-  border-collapse: collapse; /* Ensure borders are collapsed */
+  border-collapse: collapse;
+  margin-top: 20px
 }
 
 .table th,
 .table td {
-  padding: 12px; /* Add padding for better spacing */
-  text-align: left; /* Align text properly */
+  padding: 12px;
+  text-align: left;
 }
 
 .table th {
-  background-color: #4dc1d2; /* Teal background for headers */
-  color: #fff; /* White text */
+  background-color: #4dc1d2;
+  color: #fff;
 }
 
 .table td {
-  border-top: 1px solid #ddd; /* Add top border for separation */
+  border-top: 1px solid #ddd;
 }
 
+
+/* Status Indicators */
 .status-on-call {
-  color: green; /* Color for "On Call" status */
+  color: green;
   font-weight: bold;
 }
 
 .status-free {
-  color: red; /* Color for "Free" status */
+  color: red;
   font-weight: bold;
 }
 
+
+/* Calendar Grid */
 .calendar-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 10px; /* Space between the days */
+  gap: 10px;
   max-width: 100%;
   margin: 0 auto;
-  padding: 10px;
+  padding: 0px;
+  
 }
 
 .calendar-day {
   padding: 10px;
-  background-color: #e9ecef; /* Light grey for calendar days */
+  background-color: #e9ecef;
   border: 1px solid #ddd;
   border-radius: 10px;
   text-align: center;
   min-height: 80px;
   position: relative;
-  cursor: pointer; /* Add pointer cursor for clickable items */
+  cursor: pointer;
 }
 
 .calendar-day.empty {
-  background-color: #f8f9fa; /* Lighter color for empty days */
-  color: #888; /* Lighter text for empty days */
+  background-color: #f8f9fa;
+  color: #888;
 }
 
 .calendar-day.contact-assigned {
-  background-color: #4dc1d2; /* Teal background for assigned contact */
-  color: #fff; /* White text for assigned contact */
+  background-color: #4dc1d2;
+  color: #fff;
 }
 
 .calendar-day.selected {
-  background-color: #3ab0b3; /* Darker teal for selected day */
-  color: #fff; /* White text for selected day */
+  background-color: #3ab0b3;
+  color: #fff;
 }
 
-.calendar-day:last-child {
-  border-right: none;
-}
-
+/* Modal Styles */
 .modal {
   position: fixed;
   top: 0;
@@ -191,7 +222,7 @@ button:hover {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 10; /* Ensure modal is above other content */
+  z-index: 10;
 }
 
 .modal-content {
@@ -201,11 +232,18 @@ button:hover {
   width: 90%;
   max-width: 400px;
   color: #333;
-  position: relative; /* For positioning close button */
+  position: relative;
 }
 
 .modal-content h2 {
   margin-bottom: 20px;
+  .header h2 {
+  font-family: 'Aptos', sans-serif; /* Using the Aptos font */
+  display: flex;
+  align-items: center; /* Align items vertically */
+  color: #ffffff; /* Adjust the color as needed */
+}
+
 }
 
 .modal-content form {
@@ -225,39 +263,30 @@ button:hover {
   border-radius: 4px;
 }
 
-.modal-content button {
+.modal-content .button { /* Apply button styles to modal buttons */
   padding: 10px;
-  color: white;
-  background-color: #4dc1d2; /* Teal background for modal button */
   border: none;
   border-radius: 4px;
   margin-top: 10px;
+  background-color: #060a0e;
 }
 
-.modal-content button[type="button"] {
-  background-color: #5A6770; /* Gray background for the cancel button */
+.modal-content .button[type="button"] {
+  background-color: #5A6770;
 }
+
 
 .modal-content .close-button {
+  position: absolute; /* Position close button in the top right */
+  top: 10px;
+  right: 10px;
   background: none;
   border: none;
   font-size: 16px;
   cursor: pointer;
-  color: #aaa; /* Color for close button */
+  color: #aaa;
 }
 
 .modal-content .close-button:hover {
-  color: #000; /* Darker color on hover */
+  color: #000;
 }
-
-/* Additional styling for status indicators */
-.status-on-call {
-  color: rgb(250, 0, 0); /* Color for "On Call" status */
-  font-weight: bold;
-}
-
-.status-free {
-  color: rgb(7, 206, 0); /* Color for "Free" status */
-  font-weight: bold;
-}
-

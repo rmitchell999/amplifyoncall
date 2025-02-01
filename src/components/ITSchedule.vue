@@ -1,3 +1,4 @@
+
 <template src="./ITSchedule.html"></template>
 <script setup lang="ts">
 // Import necessary modules
@@ -62,7 +63,7 @@ interface UpdateITOnCallEntryInput {
   timezone?: string; // Optional: Timezone of the shift
 }
 // Props received from parent component
-const props = defineProps<{ signOut: () => void, user: any }>();
+const props = defineProps<{ user: any; isReadOnly?: boolean; }>();
 // Reactive variables for the Vue component's state
 const activeTab = ref('schedule'); // Currently active tab ('schedule' or 'contacts')
 const selectedContact = ref<ITContact | null>(null);
@@ -94,7 +95,6 @@ const months = [
 ];
 // Array of years for UI selection (last 10 years)
 const years = Array.from({ length: 10 }, (_, i) => new Date().getFullYear() + i);
-
 // Function to generate time options (HH:MM format)
 function generateTimeOptions() {
   const times = [];
@@ -111,12 +111,10 @@ function generateTimeOptions() {
 const handleContactSelect = (contact: ITContact) => {
   selectedContact.value = contact; // Set the selected contact
 };
-
 // Computed property for displaying the phone number of the selected contact
 const selectedContactPhone = computed(() => {
   return selectedContact.value ? selectedContact.value.phone : ''; // Return the phone number or an empty string
 });
-
 // Function to fetch IT contact information from the backend
 const fetchITContacts = async () => {
   console.log("Fetching IT contacts...");
@@ -153,13 +151,11 @@ const fetchITOnCallEntries = async () => {
 const saveContact = async () => {
   const e164Regex = /^\+?[1-9]\d{1,14}$/; // E.164 format validation
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Basic email validation
-
   // Email validation
   if (!emailRegex.test(form.value.email)) {
     errorMessage.value = 'Please enter a valid email address.';
     return;
   }
-
   // Check if this is an update operation
   if (editIndex.value === null) {
     // Only check for duplicates when creating a new contact
@@ -168,7 +164,6 @@ const saveContact = async () => {
       errorMessage.value = 'Contact with this name already exists.';
       return;
     }
-
     const duplicatePhone = contacts.value.find(contact => contact.phone === form.value.phone);
     if (duplicatePhone) {
       errorMessage.value = 'Contact with this phone number already exists.';
@@ -183,7 +178,6 @@ const saveContact = async () => {
       name: form.value.name,
       onCall: form.value.onCall,
     };
-
     // Update existing contact if editIndex is set, otherwise create a new contact
     if (editIndex.value !== null) {
       // Update logic: add existing contact ID
@@ -305,7 +299,6 @@ const selectDay = (entry: ITOnCallEntry) => {
     if (item !== entry) item.selected = false;
   });
 };
-
 // Function to check if the current user is an administrator
 const checkAdmin = async () => {
   try {
@@ -317,7 +310,7 @@ const checkAdmin = async () => {
     }
     const groups = session.tokens.accessToken.payload["cognito:groups"]; // Extract Cognito groups from the access token
     if (Array.isArray(groups)) {
-      isAdmin.value = groups.includes("ITAdmin"); // Check if the user belongs to the "ITAdmin" group
+      isAdmin.value = groups.includes("ITAdmin") || groups.includes("GlobalAdmin"); // Check if the user belongs to the "ITAdmin" group
     } else {
       console.error("Groups is not an array:", groups);
     }
@@ -377,7 +370,6 @@ const loadSettings = async () => {
     console.error("Error loading settings:", error);
   }
 };
-
 // Function to save the IT on-call schedule to the backend
 const saveSchedule = async () => {
   if (!confirm('Are you sure you want to save the schedule?')) return; // Confirmation prompt
@@ -427,5 +419,3 @@ const saveSchedule = async () => {
 };
 </script>
 <style src="./OnCallApplication.css" scoped></style>
-
-

@@ -1,15 +1,15 @@
 <div class="on-call-application">
   <div class="header">
+    <h1></h1>
     <button @click="props.signOut" class="logout-button">Logout</button>
   </div>
   <div class="tabs">
     <button @click="activeTab = 'schedule'">On Call Schedule</button>
-    <!-- Display the On Call Contact List button only for admins -->
     <button v-if="isAdmin" @click="activeTab = 'contacts'">On Call Contact List</button>
   </div>
   <div v-if="activeTab === 'schedule'">
-    <h1>Terneuzen Out Of Hours Schedule</h1>
-    <div v-if="!isAdmin"> <!-- Show this for non-admin users -->
+    <h2>Terneuzen Out Of Hours Schedule</h2>
+    <div v-if="!isAdmin">
       <div class="calendar-grid">
         <div
           v-for="(entry, index) in onCallList"
@@ -18,13 +18,13 @@
         >
           <div>{{ entry.dayOfWeek }}, {{ entry.day }}</div>
           <div>
-            <span>{{ contacts.find(c => c.id === entry.contactID)?.name }}</span> <!-- Only the name is displayed -->
+            <span>{{ contacts.find(c => c.id === entry.contactID)?.name }}</span> 
             <span v-if="entry.contact?.phone">({{ entry.contact.phone }})</span>
           </div>
         </div>
       </div>
     </div>
-    <div v-else> <!-- Admin view with dropdowns and save button -->
+    <div v-else>
       <div class="schedule-options">
         <div class="option-group">
           <label for="month">Month:</label>
@@ -127,3 +127,4 @@
     </div>
   </div>
 </div>
+

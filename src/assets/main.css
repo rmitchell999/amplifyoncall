@@ -1,78 +1,44 @@
+/* main.css - Global Styles */
 body {
   margin: 0;
-  background: #5A6770; /* Dark Grey */
+  background-color: #5A6770; /* Dark Grey */
+  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
   display: flex;
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   height: 100vh;
   width: 100vw;
   justify-content: center;
   align-items: center;
 }
 
-main {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  background-color: #55a4b1; /* Keep white for main background */
-  padding: 15px;
-  border-radius: 15px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid #ddd;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
+/* Utility Classes - Reusable styles */
+.teal {
   background-color: #4dc1d2; /* Teal */
-  cursor: pointer;
-  transition: background-color 0.25s, border-color 0.25s;
   color: white;
 }
 
-button:hover {
+.teal-hover:hover {
   background-color: #3ab0b3; /* Slightly darker teal */
-  border-color: #3ab0b3;
 }
 
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-ul {
-  padding-inline-start: 0;
-  margin-block-start: 0;
-  margin-block-end: 0;
-  list-style-type: none;
-  display: flex;
-  flex-direction: column;
-  margin: 8px 0;
-  border: 1px solid #ddd;
-  gap: 1px;
-  background-color: #fff;
-  border-radius: 8px;
-  overflow: auto;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-li {
+.light-grey {
   background-color: #f9f9f9; /* Light background for list items */
-  padding: 8px;
-  transition: background-color 0.3s;
 }
 
-li:hover {
+.light-grey-hover:hover {
   background-color: #e9ecef; /* Light grey on hover */
 }
 
-a {
-  font-weight: 800;
-  text-decoration: none;
-  color: #4dc1d2; /* Teal for links */
+.button {
+  border-radius: 8px;
+  border: 1px solid #ffffff;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.25s, border-color 0.25s;
 }
 
-a:hover {
-  color: #3ab0b3; /* Darker teal on hover */
+.button:focus,
+.button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
 }
