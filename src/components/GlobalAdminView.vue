@@ -1,22 +1,21 @@
 <template>
-    <div>
-      <div v-if="isAdmin">
-        <div class="button-container">
-          <button class="terneuzen-button" @click="selectSchedule('Terneuzen')">Terneuzen Schedule</button>
-          <button class="it-button" @click="selectSchedule('IT')">IT Schedule</button>
-        </div>
-        <div v-if="selectedSchedule === 'Terneuzen'">
-            <TernuezenSchedule :signOut="signOut" :user="user" />
-        </div>
-        <div v-else-if="selectedSchedule === 'IT'">
-            <TernuezenSchedule :signOut="signOut" :user="user"/>
-        </div>
-      </div>
-      <div v-else>
-        <p>You do not have permission to access this page.</p>
-      </div>
+  <div class="login-container">
+    <div v-if="isAdmin" class="button-container">
+      <button class="terneuzen-button" @click="selectSchedule('Terneuzen')">Terneuzen Schedule</button>
+      <button class="it-button" @click="selectSchedule('IT')">IT Schedule</button>
     </div>
-  </template>
+    <div v-if="selectedSchedule === 'Terneuzen'">
+        <TernuezenSchedule :signOut="signOut" :user="user" />
+    </div>
+    <div v-else-if="selectedSchedule === 'IT'">
+        <ITSchedule :signOut="signOut" :user="user"/>
+    </div>
+    <div v-else>
+      <img src="@/assets/logo.png" alt="Logo" class="logo" />
+    </div>
+  </div>
+</template>
+
   
   
   <script lang="ts">
@@ -81,18 +80,22 @@
   </script>
   
   <style scoped>
+  
 .button-container {
-  display: inline-flex; /* Or inline-block */
-  gap: px;
-  vertical-align: top; /* Align to top */
+  display: flex; /* Change to flex for proper alignment */
+  justify-content: center; /* Center the buttons horizontally */
+  gap: 5px; /* Space between buttons */
+  width: 100%; /* Ensure the container is full width */
+  margin: 10px 0; /* Optional: Add margin for spacing above and below */
 }
 
 .terneuzen-button {
+  
   background-color: #ffffff; /* Example: Green background */
   color: rgb(0, 0, 0);            /* White text */
   padding: 15px 30px;
   border: none;
-  border-radius: 1px;
+  border-radius: 5px;
   cursor: pointer;
 }
 
@@ -101,7 +104,7 @@
   color: rgb(0, 0, 0);             /* White text */
   padding: 15px 30px;
   border: none;
-  border-radius: 1px;
+  border-radius: 5px;
   cursor: pointer;
 }
 

@@ -164,12 +164,12 @@ select {
 
 /* Status Indicators */
 .status-on-call {
-  color: green;
+  color: rgb(255, 0, 0);
   font-weight: bold;
 }
 
 .status-free {
-  color: red;
+  color: rgb(45, 201, 40);
   font-weight: bold;
 }
 
@@ -181,7 +181,7 @@ select {
   gap: 10px;
   max-width: 100%;
   margin: 0 auto;
-  padding: 0px;
+  padding: px;
   
 }
 
@@ -209,6 +209,7 @@ select {
 .calendar-day.selected {
   background-color: #3ab0b3;
   color: #fff;
+
 }
 
 /* Modal Styles */

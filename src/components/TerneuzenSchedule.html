@@ -18,8 +18,21 @@
         >
           <div>{{ entry.dayOfWeek }}, {{ entry.day }}</div>
           <div>
-            <span>{{ contacts.find(c => c.id === entry.contactID)?.name }}</span> 
-            <span v-if="entry.contact?.phone">({{ entry.contact.phone }})</span>
+            <span>
+              {{ contacts.find(c => c.id === entry.contactID)?.name }}
+            </span>
+            <span v-if="entry.contactID">
+              - {{ contacts.find(c => c.id === entry.contactID)?.phone }}
+            </span>
+          </div>
+    
+          <div>
+            <select v-model="entry.contactID" @change="updatePhoneNumber(index)">
+              <option value="">Select a contact</option>
+              <option v-for="contact in contacts" :key="contact.id" :value="contact.id">
+                {{ contact.name }}
+              </option>
+            </select>
           </div>
         </div>
       </div>
@@ -101,7 +114,7 @@
           </td>
           <td>
             <button @click="openModal(index)" title="Edit Contact">✏️</button>
-            <button @click="deleteTerneuzenContact(index)" title="Delete Contact">🗑️</button>
+          <button @click="deleteContact(index)" title="Delete Contact">🗑️</button>
           </td>
         </tr>
       </tbody>

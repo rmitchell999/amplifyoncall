@@ -1,4 +1,3 @@
-
 <template>
   <main>
     <Authenticator>
@@ -15,20 +14,24 @@
             :key="componentKey"
             :signOut="signOut"
             :user="user"
-            :isReadOnly="isReadOnly"
+            :isReadOnly="isReadOnly" 
           />
         </div>
       </template>
     </Authenticator>
   </main>
 </template>
+
 <script lang="ts">
-import { defineComponent, ref, computed, onMounted, watchEffect } from 'vue';
+import { defineComponent, ref, computed, onMounted, onBeforeUnmount } from 'vue';
 import { Authenticator } from '@aws-amplify/ui-vue';
 import TernuezenSchedule from './components/TerneuzenSchedule.vue';
 import ITSchedule from './components/ITSchedule.vue';
 import GlobalAdminView from './components/GlobalAdminView.vue';
+import { Hub } from 'aws-amplify/utils';
 import { fetchAuthSession } from 'aws-amplify/auth';
+
+
 export default defineComponent({
   components: {
     Authenticator,
@@ -38,78 +41,100 @@ export default defineComponent({
   },
   setup() {
     const userGroups = ref<string[]>([]);
-    const isLoggedIn = ref(false);
     const isLoading = ref(true);
-    const isReadOnly = ref(false);
     const componentKey = ref(0);
-    const authStateRef = ref<string>(); //Added ref for authState
-    const getUserGroups = async () => {
-      try {
-        const session = await fetchAuthSession();
-        isLoggedIn.value = !!session.tokens?.accessToken;
-        if (session.tokens?.accessToken) {
-          const groups = session.tokens.accessToken.payload['cognito:groups'];
-          userGroups.value = Array.isArray(groups)
-            ? groups.filter((group: any) => typeof group === 'string')
-            : (typeof groups === 'string' ? [groups] : []);
-        } else {
-          userGroups.value = [];
-        }
-      } catch (error) {
-        console.error("Error fetching user groups:", error);
-      } finally {
-        isLoading.value = false;
-      }
-    };
+    const isReadOnly = ref(false); // Define the isReadOnly property
+
     const isGlobalAdmin = computed(() => userGroups.value.includes('GlobalAdmin'));
-    const isTernuezenAdmin = computed(() => userGroups.value.includes('TerneuzenAdmin'));
-    const isTernuezenReadOnly = computed(() => userGroups.value.includes('TerneuzenReadOnly'));
+    const isTerneuzenAdmin = computed(() => userGroups.value.includes('TerneuzenAdmin'));
+    const isTerneuzenReadOnly = computed(() => userGroups.value.includes('TerneuzenReadOnly'));
     const isITAdmin = computed(() => userGroups.value.includes('ITAdmin'));
     const isITReadOnly = computed(() => userGroups.value.includes('ITReadOnly'));
+
     const selectedComponent = computed(() => {
-      console.log('User Groups:', userGroups.value);
-      if (isGlobalAdmin.value) return 'GlobalAdminView';
-      else if (isTernuezenAdmin.value) return 'TernuezenSchedule';
-      else if (isTernuezenReadOnly.value) return 'TernuezenSchedule';
-      else if (isITAdmin.value) return 'ITSchedule';
-      else if (isITReadOnly.value) return 'ITSchedule';
-      else return null;
-    });
-    // Watch for changes in authState
-    watchEffect(async () => {
-      if (authStateRef.value === 'signedOut') {
-        userGroups.value = [];
-      } else if (authStateRef.value === 'signedIn'){
-        await getUserGroups();
+  console.log('User Groups:', userGroups.value); // Log user groups for debugging
+  if (isGlobalAdmin.value) {
+    return 'GlobalAdminView';
+  } else if (isTerneuzenAdmin.value || isTerneuzenReadOnly.value) {
+    return 'TernuezenSchedule';
+  } else if (isITAdmin.value || isITReadOnly.value) {
+    return 'ITSchedule';
+  } else {
+    return null; // Handle cases where no group matches
+  }
+});
+
+// Fetch user groups
+const fetchUserGroups = async () => {
+  try {
+    const session = await fetchAuthSession(); // Fetch the current session
+    console.log("Session:", session); // Log the session for debugging
+    const groups = session.tokens?.accessToken.payload['cognito:groups'] || [];
+    
+    userGroups.value = Array.isArray(groups) 
+      ? groups.filter((group) => typeof group === 'string') 
+      : (typeof groups === 'string' ? [groups] : []);
+    
+    console.log("User Groups after fetch:", userGroups.value); // Log the fetched user groups
+
+    // Debug the selected component
+    console.log("Selected Component after fetch:", selectedComponent.value);
+  } catch (error) {
+    console.error("Error fetching user groups:", error);
+  } finally {
+    isLoading.value = false; // Set loading to false after attempting to fetch user groups
+  }
+};
+
+
+    // Set up an Amplify Hub listener for auth events
+    const handleAuthEvents = (data: { payload: { event: string } }) => {
+      const { payload } = data; // Destructure payload from event data
+      switch (payload.event) {
+        case 'signedIn':
+          console.log("User has signed in.");
+          fetchUserGroups(); // Fetch user groups on sign-in
+          componentKey.value += 1; // Update the component key to trigger a re-render
+          break;
+        case 'signedOut':
+          console.log("User has signed out.");
+          userGroups.value = []; // Clear user groups when signed out
+          componentKey.value += 1; // Update the component key to trigger a re-render
+          break;
+        default:
+          break;
       }
-      componentKey.value += 1;
+    };
+
+    // Subscribe to auth events on mounted
+    onMounted(() => {
+      const hubListenerCancelToken = Hub.listen('auth', handleAuthEvents); // Start listening for auth events
+      fetchUserGroups(); // Initial fetch of user groups when component is mounted
+
+      // Cleanup listener on unmounted
+      onBeforeUnmount(() => {
+        hubListenerCancelToken(); // Remove the listener using the token returned
+      });
     });
-    onMounted(async () => {
-      await getUserGroups();
-    });
+
     return {
       userGroups,
       isGlobalAdmin,
-      isTernuezenAdmin,
-      isTernuezenReadOnly,
+      isTerneuzenAdmin,
+      isTerneuzenReadOnly,
       isITAdmin,
       isITReadOnly,
       selectedComponent,
-      isLoggedIn,
-      isReadOnly,
       isLoading,
       componentKey,
-      authStateRef, //Make authStateRef available in template
+      isReadOnly, // Make isReadOnly available in the template
     };
   },
 });
 </script>
 
-
-
 <style>
 @import '@aws-amplify/ui-vue/styles.css';
-
 
 .dashboard-title {
   color: #ffffff;
@@ -121,10 +146,10 @@ export default defineComponent({
 main {
   margin-top: 0px;
   padding: 10px;
-  background-color: #3ab0b3;
+  background-color: #3ab0b3; /* Set the background color */
 }
 
-/* List Styles */
+/* Additional list styles */
 ul {
   padding-inline-start: 0;
   margin-block-start: 0;
@@ -138,21 +163,19 @@ ul {
   overflow: auto;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-
 li {
   background-color: #f9f9f9;
   padding: 0px;
   transition: background-color 0.3s;
 }
 
-
 a {
   font-weight: 800;
   text-decoration: none;
   color: #ffffff;
 }
-
 a:hover {
   color: #3ab0b3;
 }
 </style>
+
